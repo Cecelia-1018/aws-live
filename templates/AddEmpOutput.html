@@ -1,23 +1,86 @@
 <!DOCTYPE html>
 <html>
 <head>
-<center>
-	<font color="DodgerBlue" size="5" style="font-family: avenir">
-		<body bgcolor="lightgrey">
-			<h1>SAVE SUCCESSFUL</h1><br>
-			<h2>Following Employee has been added to the database</h2><br>
+	<style>
+		@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: "Poppins", sans-serif;
+		}
+		body {
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 10px;
+			background: linear-gradient(135deg, #70e1f5, #ffd194);
+		}
+		.container {
+			max-width: 700px;
+			width: 100%;
+			background-color: #fff;
+			padding: 25px 30px;
+			border-radius: 5px;
+			box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+
+		}
+		.container .title {
+			font-weight: 1000;
+			position: relative;
+		}
+		.container .title::before {
+			content: "";
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			height: 3px;
+			width: 30px;
+			border-radius: 5px;
+			background: linear-gradient(135deg, #70e1f5, #ffd194);
+		}
+		form .button {
+			height: 45px;
+			margin: 35px 0;
+		}
+
+		form .button input {
+			height: 100%;
+			width: 100%;
+			border-radius: 5px;
+			border: none;
+			color: #fff;
+			font-size: 18px;
+			font-weight: 500;
+			letter-spacing: 1px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			background: linear-gradient(135deg, #70e1f5, #ffd194);
+		}
+
+		form .button input:hover {
+			background: linear-gradient(-135deg, #70e1f5, #ffd194);
+		}
+
+	</style>	
+</head>
+	
+		<body>
+			<div class="container">
+			<h1>
+				<div class="title">SAVE SUCCESSFUL</div>
+			</h1>
+			<br>
+			<h2>Following Employee has been added to the database.</h2><br>
 			<h2>{{ name }}</h2><br>
 			<title>Add Emp Output</title>
 				<form action="http://3.231.144.221:80/" autocomplete="on" method = "GET">
-
-					<button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GO BACK</button><br><br>
-
+					<div class="button">
+						<input type="submit" value="Go Back">
+					</div>
 				</form>
+			</div>
 		</body>
-	</font>
-</center>
-</head>
-<body>
-
-</body>
+	
 </html>
