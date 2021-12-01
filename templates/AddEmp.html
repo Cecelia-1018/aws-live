@@ -1,37 +1,75 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Add Employee Information</title>
+	<link rel="stylesheet" href="styleAddEmp.css">
 </head>
-<center>
-	<font color="black" size="4" style="font-family: avenir">
 
-		<h1 style="color: DodgerBlue">Employee Database</h1>
+<body>
+	<div class="container">
 
-		<body bgcolor="lightgrey">
+		<div class="title">Employee Database</div>
 
-			<form action="/addemp" autocomplete="on" method = "POST" enctype="multipart/form-data">
+		<div class="content">
 
-				<button type="submit" formaction="/getemp" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GET EMPLOYEE INFORMATION</button><br><br>
+			<form action="/addemp" autocomplete="on" method="POST" enctype="multipart/form-data">
 
-		  		Employee ID:<br> <input style="height:25px;font-size:14pt; color:grey;" type="number" name="emp_id" autofocus size="40"><br><br>
+				
 
-		  		First Name:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="first_name" ><br><br>
 
-		  		Last Name:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="last_name"><br><br>
+				<div class="employee-details">
+                
+					<div class="input-box-image">
+						<span class="details"></span>
+						<img id="pic" src="unknown.jpg" alt="employee-image" />
+						<input type=file name="emp_image_file" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
+						<br>
+					</div>
+				
 
-		  		Primary Skills:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="pri_skill"><br><br>
+					<div class="input-box">
+						<span class="details">Employee ID:</span>
+						<input type="number" name="emp_id" placeholder="Enter ID" required>
+					</div>
 
-		  		Location:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="location"><br><br>
+					<div class="input-box">
+						<span class="details">First Name:</span>
+						<input type="text" name="first_name" placeholder="Enter First Name" required>
+					</div>
 
-		  		Image: <input type=file name="emp_image_file" style="height:25px;font-size:14pt;color:grey;"> <br><br>
+					<div class="input-box">
+						<span class="details">Last Name:</span>
+						<input type="text" name="last_name" placeholder="Enter Last Name" required>
+					</div>
 
-		  		<button type="submit" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">UPDATE DATABASE</button>
+					<div class="input-box">
+						<span class="details">Primary Skills:</span>
+						<input type="text" name="pri_skill" placeholder="Enter Primary Skills" required>
+					</div>
+
+					<div class="input-box">
+						<span class="details">Location:</span>
+						<input type="text" name="location" placeholder="Enter Locations" required>
+					</div>
+
+					
+				</div>
+
+				<div class="button">
+					<input type="submit" value="Update Database">
+				</div>
+
+				<div class="button1" type="submit" formaction="/getemp">
+					<input type="submit" value="Get Employee Information">
+				</div>
+
+
 
 			</form>
-<a href="/about">About Us</a>
-		</body>
+			<a href="/about">About Us</a>
+		</div>
+	</div>
+</body>
 
-	</font>
-</center>
 </html>
