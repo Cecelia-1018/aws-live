@@ -123,12 +123,12 @@
 			background: linear-gradient(-135deg, #70e1f5, #ffd194);
 		}
 
-		form .button1 {
+		.button1 {
 			height: 45px;
 			margin: 35px 0;
 		}
 
-		form .button1 input {
+		.button1 input {
 			height: 100%;
 			width: 100%;
 			border-radius: 5px;
@@ -142,7 +142,7 @@
 			background: linear-gradient(135deg, #74ebd5, #acb6e5);
 		}
 
-		form .button1 input:hover {
+		.button1 input:hover {
 			background: linear-gradient(-135deg, #74ebd5, #acb6e5);
 		}
 		#pic {
@@ -163,10 +163,11 @@
 		<div class="title">Employee Database</div>
 
 		<div class="content">
+			
 
 			<form action="/addemp" autocomplete="on" method="POST" enctype="multipart/form-data">
 
-
+               
 
 
 				<div class="employee-details">
@@ -203,7 +204,7 @@
 
 					<div class="input-box">
 						<span class="details">Location:</span>
-						<input type="text" name="location" placeholder="Enter Locations" required>
+						<input type="text" name="location" placeholder="Enter Location" required>
 					</div>
 
 
@@ -213,13 +214,14 @@
 					<input type="submit" value="Update Database">
 				</div>
 
-				<div class="button1" type="submit" formaction="/getemp">
-					<input type="submit" value="Get Employee Information">
-				</div>
+				
 
 
 
 			</form>
+			<div class="button1" type="submit" formaction="/getemp">
+				<input type="submit" value="Get Employee Information">
+			</div>
 			<a href="/about">About Us</a>
 		</div>
 	</div>
