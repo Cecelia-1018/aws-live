@@ -145,6 +145,7 @@
 		.button1 input:hover {
 			background: linear-gradient(-135deg, #74ebd5, #acb6e5);
 		}
+
 		#pic {
 			/* float: left; */
 			width: 150px;
@@ -163,7 +164,7 @@
 		<div class="title">Employee Database</div>
 
 		<div class="content">
-			
+
 
 			<form action="/addemp" autocomplete="on" method="POST" enctype="multipart/form-data">
 				<div class="employee-details">
@@ -180,27 +181,27 @@
 
 					<div class="input-box">
 						<span class="details">Employee ID:</span>
-						<input type="number" name="emp_id" placeholder="Enter ID" >
+						<input type="number" name="emp_id" placeholder="Enter ID">
 					</div>
 
 					<div class="input-box">
 						<span class="details">First Name:</span>
-						<input type="text" name="first_name" placeholder="Enter First Name" >
+						<input type="text" name="first_name" placeholder="Enter First Name">
 					</div>
 
 					<div class="input-box">
 						<span class="details">Last Name:</span>
-						<input type="text" name="last_name" placeholder="Enter Last Name" >
+						<input type="text" name="last_name" placeholder="Enter Last Name">
 					</div>
 
 					<div class="input-box">
 						<span class="details">Primary Skills:</span>
-						<input type="text" name="pri_skill" placeholder="Enter Primary Skills" >
+						<input type="text" name="pri_skill" placeholder="Enter Primary Skills">
 					</div>
 
 					<div class="input-box">
 						<span class="details">Location:</span>
-						<input type="text" name="location" placeholder="Enter Location" >
+						<input type="text" name="location" placeholder="Enter Location">
 					</div>
 
 
@@ -209,13 +210,13 @@
 				<div class="button">
 					<input type="submit" value="Update Database">
 				</div>
-				<a href="GetEmp.html">
-					<div class="button1" type="submit">
-						<input type="submit" value="Get Employee Information">
-					</div>
-				</a>
+
+				<div class="button1" type="submit" formaction="/getemp" method="GET">
+					<input type="submit" value="Get Employee Information">
+				</div>
+
 			</form>
-			
+
 			<a href="/about">About Us</a>
 		</div>
 	</div>
