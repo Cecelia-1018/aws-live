@@ -50,8 +50,10 @@ def fetchdata():
             session['id'] = emp_id['emp_id']
             session['fname'] = emp_id['first_name']
             msg = 'The employee is found in successfully !'
+            return render_template('GetEmpOutput.html', msg=msg)
         else:
             msg = "The employee is not found!"
+            return render_template('GetEmpOutput.html', msg=msg)
 
         # id = emp_id['emp_id']
         # fname = emp_id['first_name']
