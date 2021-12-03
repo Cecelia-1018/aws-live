@@ -43,13 +43,15 @@ def fetchdata():
         fetch_emp_sql = "SELECT * FROM employee WHERE emp_id = %s"
         cursor.execute(fetch_emp_sql, (emp_id,))
         emp_id = cursor.fetchone()  
-
+      
+        id = emp_id['emp_id']
+        fname = emp_id['first_name']
 
 
         # if emp_id == "":
         #     return render_template('AddEmp.html', fetchdata=fetchdata)
 
-        return render_template('GetEmpOutput.html', id=emp_id)
+        return render_template('GetEmpOutput.html', id=id, fname=fname)
     else:
         return render_template('AddEmp.html', fetchdata=fetchdata)
 
