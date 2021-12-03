@@ -36,18 +36,19 @@ def GetEmp():
 
 # @app.route('/fetchdata/<emp_id>')
 @app.route("/fetchdata", methods=['GET','POST'])
-def fetchdata(emp_id):
+def fetchdata():
    
     # cursor = db_conn.cursor()
-
+ 
     # fetch_emp_sql = "SELECT * FROM employee WHERE emp_id = %s"
     # cursor.execute(fetch_emp_sql, (emp_id,))
     # emp_id = cursor.fetchone()  
+    emp_id = request.form['emp_id']
 
     if emp_id == "":
         return render_template('AddEmp.html', fetchdata=fetchdata)
     
-    return render_template('GetEmpOutput.html', fetchdata=fetchdata)
+    return render_template('GetEmpOutput.html', id=emp_id)
 
 
 
