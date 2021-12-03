@@ -65,6 +65,7 @@
 			font-weight: 500;
 			margin-bottom: 5px;
 		}
+
 		.employee-details .input-box input {
 			height: 45px;
 			width: 100%;
@@ -76,10 +77,12 @@
 			border-bottom-width: 2px;
 			transition: all 0.3s ease;
 		}
+
 		.employee-details .input-box input:focus,
 		.employee-details .input-box input:valid {
 			border-color: #70e1f5;
 		}
+
 		form .button {
 			height: 45px;
 			margin: 35px 0;
@@ -125,45 +128,44 @@
 		.button1 input:hover {
 			background: linear-gradient(-135deg, #74ebd5, #acb6e5);
 		}
-
 	</style>
 	<title>Get Employee Information</title>
 </head>
 
 <body>
 	<div class="container">
-	<div class="title">Employee Information</div>
-	<div class="content">
-		<form action="/fetchdata" autocomplete="on" method="POST">
-			<div class="employee-details">
+		<div class="title">Employee Information</div>
+		<div class="content">
+			<form action="/fetchdata" autocomplete="on" method="POST">
+				<div class="employee-details">
 
-			<!-- <h2>Enter Employee ID</h2> -->
+					<!-- <h2>Enter Employee ID</h2> -->
 
-			
-				<div class="input-box">
-					<span class="details">Employee ID:</span>
-					<input type="number" name="emp_id" autofocus size="40">
+
+					<div class="input-box">
+						<span class="details">Employee ID:</span>
+						<input type="number" name="emp_id" autofocus size="40">
+					</div>
+
+
+
 				</div>
-				
 
-				
-			</div>
+				<div class="button">
+					<input type="submit" value="Fetch Info">
+				</div>
 
-			<div class="button">
-				<input type="submit" value="Fetch Info">
-			</div>
-			
-			
-			
-		</form>
+			</form>
 
-		
-			<div class="button1" type="submit" autocomplete="on" formaction="/" method="POST">
-				<input type="submit" value="Go To Update Database Page">
-			</div>
-		
+			<form action="/fetchdata" autocomplete="on" method="GET">
 
-	</div>
+				<div class="button1" type="submit" autocomplete="on" formaction="/" method="POST">
+					<input type="submit" value="Go To Update Database Page">
+				</div>
+
+			</form>
+
+		</div>
 	</div>
 
 
