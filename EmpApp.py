@@ -30,6 +30,12 @@ def home():
 def about():
     return render_template('GetEmp.html', about=about)
 
+# /fetchdata
+@app.route("/fetchdata", methods=['GET','POST'])
+def fetchdata():
+    return render_template('AppEmp.html', fetchdata=fetchdata)
+
+
 
 @app.route("/addemp", methods=['GET','POST'])
 def AddEmp():
