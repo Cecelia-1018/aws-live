@@ -35,7 +35,7 @@ def GetEmp():
     return render_template('GetEmp.html', GetEmp=GetEmp)
 
 @app.route("/fetchdata", methods=['GET','POST'])
-def fetchdata(emp_id):
+def fetchdata():
    
     cursor = db_conn.cursor()
 
@@ -43,7 +43,7 @@ def fetchdata(emp_id):
     cursor.execute(fetch_emp_sql, (id,))
     emp = cursor.fetchone()  
 
-    if emp_id == "":
+    if emp == "":
         return render_template('AddEmp.html', fetchdata=fetchdata)
     
     return render_template('GetEmpOutput.html', emp=emp)
