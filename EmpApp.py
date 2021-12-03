@@ -38,6 +38,8 @@ def GetEmp():
 @app.route("/fetchdata", methods=['GET','POST'])
 def fetchdata():
     msg = ''
+    emp_id = request.form['emp_id']
+
     if request.method == 'POST':
         emp_id = request.form['emp_id']
         cursor = db_conn.cursor()
@@ -63,7 +65,7 @@ def fetchdata():
         # #     return render_template('AddEmp.html', fetchdata=fetchdata)
         #return render_template('GetEmpOutput.html', id=emp_id['emp_id'],fname=emp_id['first_name'])
 
-        return render_template('GetEmpOutput.html', id=id)
+        return render_template('GetEmpOutput.html', id=emp_id)
     else:
         return render_template('AddEmp.html', fetchdata=fetchdata)
 
