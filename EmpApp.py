@@ -61,8 +61,9 @@ def fetchdata():
 
         # # if emp_id == "":
         # #     return render_template('AddEmp.html', fetchdata=fetchdata)
+        #return render_template('GetEmpOutput.html', id=emp_id['emp_id'],fname=emp_id['first_name'])
 
-        return render_template('GetEmpOutput.html', id=emp_id['emp_id'],fname=emp_id['first_name'])
+        return render_template('GetEmpOutput.html', id=emp_id)
     else:
         return render_template('AddEmp.html', fetchdata=fetchdata)
 
