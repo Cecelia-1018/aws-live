@@ -1,9 +1,8 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request
 from pymysql import connections
 import os
 import boto3
 from config import *
-
 
 app = Flask(__name__)
 
@@ -37,33 +36,16 @@ def GetEmp():
 # @app.route('/fetchdata/<emp_id>')
 @app.route("/fetchdata", methods=['GET','POST'])
 def fetchdata():
-    msg = ''
-    emp_id = request.form['emp_id']
-
     if request.method == 'POST':
         emp_id = request.form['emp_id']
         cursor = db_conn.cursor()
 
         fetch_emp_sql = "SELECT * FROM employee WHERE emp_id = %s"
         cursor.execute(fetch_emp_sql, (emp_id,))
-        emp_id = cursor.fetchone() 
+        emp_id = cursor.fetchone()  
 
-        # if emp_id != "":
-        #     session['id'] = emp_id['emp_id']
-        #     session['fname'] = emp_id['first_name']
-        #     msg = 'The employee is found in successfully !'
-        #     return render_template('GetEmpOutput.html', msg=msg)
-        # else:
-        #     msg = "The employee is not found!"
-        #     return render_template('GetEmpOutput.html', msg=msg)
-
-        # # id = emp_id['emp_id']
-        # # fname = emp_id['first_name']
-
-
-        # # if emp_id == "":
-        # #     return render_template('AddEmp.html', fetchdata=fetchdata)
-        #return render_template('GetEmpOutput.html', id=emp_id['emp_id'],fname=emp_id['first_name'])
+        # if emp_id == "":
+        #     return render_template('AddEmp.html', fetchdata=fetchdata)
 
         return render_template('GetEmpOutput.html', id=emp_id)
     else:
