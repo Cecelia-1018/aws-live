@@ -100,12 +100,12 @@
 			border-color: #70e1f5;
 		}
 
-		form .button {
+		.content .button {
 			height: 45px;
 			margin: 35px 0;
 		}
 
-		form .button input {
+		.content .button input {
 			height: 100%;
 			width: 100%;
 			border-radius: 5px;
@@ -119,7 +119,7 @@
 			background: linear-gradient(135deg, #70e1f5, #ffd194);
 		}
 
-		form .button input:hover {
+		.content .button input:hover {
 			background: linear-gradient(-135deg, #70e1f5, #ffd194);
 		}
 
@@ -164,12 +164,15 @@
 		<div class="title">Employee Database</div>
 
 		<div class="content">
-
+            
+			
+			<div class="button" type="submit" formaction="/getemp" method="GET">
+				<input type="submit" value="Get Employee Information">
+			</div>
+		    
 
 			<form action="/addemp" autocomplete="on" method="POST" enctype="multipart/form-data">
-				<div class="button" type="submit" formaction="/getemp" method="GET">
-					<input type="submit" value="Get Employee Information">
-				</div>
+				
 
 				<div class="employee-details">
 
