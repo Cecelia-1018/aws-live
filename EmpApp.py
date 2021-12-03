@@ -33,7 +33,13 @@ def about():
 # /fetchdata
 @app.route("/fetchdata", methods=['GET','POST'])
 def fetchdata():
-    return render_template('AddEmp.html', fetchdata=fetchdata)
+    emp_id = request.form['emp_id']
+
+    if emp_id == "":
+        return render_template('AddEmp.html', fetchdata=fetchdata)
+    
+
+    return render_template('GetEmpOutput.html', fetchdata=fetchdata)
 
 
 
