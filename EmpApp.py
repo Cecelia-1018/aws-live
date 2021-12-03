@@ -30,7 +30,11 @@ def home():
 def about():
     return render_template('GetEmp.html', about=about)
 
-# /fetchdata
+@app.route("/getemp", methods=['GET','POST'])
+def GetEmp():
+    return render_template('GetEmp.html', GetEmp=GetEmp)
+
+
 @app.route("/fetchdata", methods=['GET','POST'])
 def fetchdata():
     emp_id = request.form['emp_id']
