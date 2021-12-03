@@ -33,7 +33,7 @@ def about():
 # /fetchdata
 @app.route("/fetchdata", methods=['GET','POST'])
 def fetchdata():
-    return render_template('AppEmp.html', fetchdata=fetchdata)
+    return render_template('AddEmp.html', fetchdata=fetchdata)
 
 
 
