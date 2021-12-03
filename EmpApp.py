@@ -46,7 +46,7 @@ def fetchdata():
         cursor.execute(fetch_emp_sql, (emp_id,))
         emp_id = cursor.fetchone() 
 
-        if emp_id:
+        if emp_id != "":
             session['id'] = emp_id['emp_id']
             session['fname'] = emp_id['first_name']
             msg = 'The employee is found in successfully !'
