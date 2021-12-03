@@ -46,23 +46,23 @@ def fetchdata():
         cursor.execute(fetch_emp_sql, (emp_id,))
         emp_id = cursor.fetchone() 
 
-        if emp_id != "":
-            session['id'] = emp_id['emp_id']
-            session['fname'] = emp_id['first_name']
-            msg = 'The employee is found in successfully !'
-            return render_template('GetEmpOutput.html', msg=msg)
-        else:
-            msg = "The employee is not found!"
-            return render_template('GetEmpOutput.html', msg=msg)
+        # if emp_id != "":
+        #     session['id'] = emp_id['emp_id']
+        #     session['fname'] = emp_id['first_name']
+        #     msg = 'The employee is found in successfully !'
+        #     return render_template('GetEmpOutput.html', msg=msg)
+        # else:
+        #     msg = "The employee is not found!"
+        #     return render_template('GetEmpOutput.html', msg=msg)
 
-        # id = emp_id['emp_id']
-        # fname = emp_id['first_name']
+        # # id = emp_id['emp_id']
+        # # fname = emp_id['first_name']
 
 
-        # if emp_id == "":
-        #     return render_template('AddEmp.html', fetchdata=fetchdata)
+        # # if emp_id == "":
+        # #     return render_template('AddEmp.html', fetchdata=fetchdata)
 
-        return render_template('GetEmpOutput.html', msg=msg)
+        return render_template('GetEmpOutput.html', id=emp_id['emp_id'],fname=emp_id['first_name'])
     else:
         return render_template('AddEmp.html', fetchdata=fetchdata)
 
