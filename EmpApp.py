@@ -43,8 +43,10 @@ def AddEmp():
     insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
+    # if emp_image_file.filename == "":
+    #     return "Please select a file"
     if emp_image_file.filename == "":
-        return "Please select a file"
+        return render_template('GetEmp.html')
 
     try:
 
