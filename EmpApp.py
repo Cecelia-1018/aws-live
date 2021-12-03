@@ -34,6 +34,7 @@ def about():
 def GetEmp():
     return render_template('GetEmp.html', GetEmp=GetEmp)
 
+@app.route('/fetchdata/<emp_id>')
 @app.route("/fetchdata", methods=['GET','POST'])
 def fetchdata(emp_id):
    
