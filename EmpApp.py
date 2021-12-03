@@ -35,18 +35,18 @@ def GetEmp():
     return render_template('GetEmp.html', GetEmp=GetEmp)
 
 @app.route("/fetchdata", methods=['GET','POST'])
-def fetchdata():
+def fetchdata(emp_id):
    
     cursor = db_conn.cursor()
 
     fetch_emp_sql = "SELECT * FROM employee WHERE emp_id = %s"
-    cursor.execute(fetch_emp_sql, (id,))
-    emp = cursor.fetchone()  
+    cursor.execute(fetch_emp_sql, (emp_id,))
+    emp_id = cursor.fetchone()  
 
-    if emp == "":
+    if emp_id == "":
         return render_template('AddEmp.html', fetchdata=fetchdata)
     
-    return render_template('GetEmpOutput.html', emp=emp)
+    return render_template('GetEmpOutput.html', emp_id=emp_id)
 
 
 
