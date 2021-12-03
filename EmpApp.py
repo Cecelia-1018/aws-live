@@ -31,7 +31,7 @@ def about():
     return render_template('GetEmp.html', about=about)
 
 
-@app.route("/addemp", methods=['POST'])
+@app.route("/addemp", methods=['GET','POST'])
 def AddEmp():
     emp_id = request.form['emp_id']
     first_name = request.form['first_name']
@@ -43,10 +43,10 @@ def AddEmp():
     insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
-    # if emp_image_file.filename == "":
-    #     return "Please select a file"
     if emp_image_file.filename == "":
-        return render_template('GetEmp.html')
+        return "Please select a file"
+    # if emp_image_file.filename == "":
+    #     return render_template('GetEmp.html', AddEmp=AddEmp)
 
     try:
 
