@@ -34,11 +34,13 @@ def GetEmp():
     return render_template('GetEmp.html', GetEmp=GetEmp)
 
 def show_image(bucket):
+    emp_id = request.form['emp_id']
     s3_client = boto3.client('s3')
     public_urls = []
+    emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
     try:
-        for item in s3_client.list_objects(Bucket=bucket)['Contents']:
-            presigned_url = s3_client.generate_presigned_url('get_object', Params = {'Bucket': bucket, 'Key': item['Key']}, ExpiresIn = 100)
+        for emp_image_file_name_in_s3 in s3_client.list_objects(Bucket=bucket)['Contents']:
+            presigned_url = s3_client.generate_presigned_url('get_object', Params = {'Bucket': bucket, 'Key': emp_image_file_name_in_s3}, ExpiresIn = 100)
             public_urls.append(presigned_url)
     except Exception as e:
         pass
