@@ -91,7 +91,7 @@
 		<br>
 
 		<form>
-			<div class="details">
+			<!-- <div class="details">
 
 				Employee ID:<br> {{ id }} <br><br>
 
@@ -104,7 +104,26 @@
 				Location:<br> {{ location }} <br><br>
 
 				Image URL: <br> {{ image_url }} <br><br>
-				<div class="msg">{{ msg }}</div>
+			</div> -->
+			<table>
+				<tr>
+				  <th>Employee ID</th>
+				  <th>First Name</th>
+				  <th>Last Name</th>
+				  <th>Primary Skill</th>
+				  <th>Location</th>
+				</tr>
+				{% for employee in employees %}
+				  <tr>
+					<td>{{employee[0]}}</td>
+					<td>{{employee[4]}}</td>
+					<td>{{employee[3]}}</td>
+					<td>{{employee[2]}}</td>
+					<td>{{employee[1]}}</td>
+				  </tr>
+				{% endfor %}
+			  </table>
+				
 		</form>
 		<form action="/getemp" autocomplete="on" method="GET">
 			<div class="button">
