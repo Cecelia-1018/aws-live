@@ -40,8 +40,9 @@ def show_image(bucket):
     emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
     try:
         for emp_image_file_name_in_s3 in s3_client.list_objects(Bucket=bucket)['Contents']:
-            presigned_url = s3_client.generate_presigned_url('get_object', Params = {'Bucket': bucket, 'Key': emp_image_file_name_in_s3['Key']}, ExpiresIn = 100)
-            public_urls.append(presigned_url)
+            if emp_id ==  request.form['emp_id'] :
+                presigned_url = s3_client.generate_presigned_url('get_object', Params = {'Bucket': bucket, 'Key': emp_image_file_name_in_s3['Key']}, ExpiresIn = 100)
+                public_urls.append(presigned_url)
     except Exception as e:
         pass
     # print("[INFO] : The contents inside show_image = ", public_urls)
