@@ -39,7 +39,7 @@ def show_image(bucket):
     public_urls = []
     emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
     try:
-        for emp_image_file_name_in_s3 in s3_client.list_objects(Bucket=bucket)['Contents']:
+        # for emp_image_file_name_in_s3 in s3_client.list_objects(Bucket=bucket)['Contents']:
             if emp_id ==  request.form['emp_id'] :
                 presigned_url = s3_client.generate_presigned_url('get_object', Params = {'Bucket': bucket, 'Key': emp_image_file_name_in_s3['Key']}, ExpiresIn = 100)
                 public_urls.append(presigned_url)
