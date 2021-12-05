@@ -105,29 +105,17 @@
 
 				Image URL: <br> {{ image_url }} <br><br>
 			</div> -->
-			<!-- <table>
-				<tr>
-				  <th>Employee ID</th>
-				  <th>First Name</th>
-				  <th>Last Name</th>
-				  <th>Primary Skill</th>
-				  <th>Location</th>
-				</tr>
-				{% for employee in employees %}
-				  <tr>
-					<td>{{employee[0]}}</td>
-					<td>{{employee[4]}}</td>
-					<td>{{employee[3]}}</td>
-					<td>{{employee[2]}}</td>
-					<td>{{employee[1]}}</td>
-				  </tr>
-				{% endfor %}
-			  </table> -->
-			  <table>
-				%s
-				</table>
-				
 		<!-- </form> -->
+        <table border="1" cellpadding="5" cellspacing="5">
+			{% for row in emp %}
+			<tr>
+			<td>{{row.Last}}</td>
+			<td>{{row.First}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+
+
 		<form action="/getemp" autocomplete="on" method="GET">
 			<div class="button">
 				<input type="submit" value="Reset">
@@ -138,7 +126,4 @@
 	</form>
 
 </body>
-
-
 </html>
-'''%(e)
