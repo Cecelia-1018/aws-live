@@ -46,9 +46,10 @@ def fetchdata():
             fetch_emp_sql = "SELECT * FROM employee WHERE emp_id = %s"
             cursor.execute(fetch_emp_sql,(emp_id))
             emp_id= cursor.fetchall()  
-            print(emp_id)
             
-            return render_template('GetEmpOutput.html', emp=emp_id)
+            (id,fname,lname,priSkill,location) = emp_id[0]
+            
+            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location)
         except Exception as e:
             return str(e)
     else:
