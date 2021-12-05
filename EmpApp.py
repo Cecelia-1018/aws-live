@@ -36,17 +36,18 @@ def GetEmp():
 # @app.route('/fetchdata/<emp_id>')
 @app.route("/fetchdata", methods=['GET','POST'])
 def fetchdata():
-    emp_id = request.form['emp_id']
+    
 
     if request.method == 'POST':
         try:
+            emp_id = request.form['emp_id']
             cursor = db_conn.cursor()
             fetch_emp_sql = "SELECT emp_id AS Id, first_name AS fname, last_name AS lname FROM employee WHERE emp_id = %s"
-            cursor.execute(fetch_emp_sql)
-            emp= cursor.fetchall()  
-            print(emp)
+            cursor.execute(fetch_emp_sql,(emp_id))
+            emp_id= cursor.fetchall()  
+            print(emp_id)
             
-            return render_template('GetEmpOutput.html', emp=emp)
+            return render_template('GetEmpOutput.html', emp=emp_id)
         except Exception as e:
             return str(e)
     else:
