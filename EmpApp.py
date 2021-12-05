@@ -33,6 +33,19 @@ def about():
 def GetEmp():
     return render_template('GetEmp.html', GetEmp=GetEmp)
 
+def show_image(bucket):
+    s3_client = boto3.client('s3')
+    public_urls = []
+    try:
+        for item in s3_client.list_objects(Bucket=bucket)['Contents']:
+            presigned_url = s3_client.generate_presigned_url('get_object', Params = {'Bucket': bucket, 'Key': item['Key']}, ExpiresIn = 100)
+            public_urls.append(presigned_url)
+    except Exception as e:
+        pass
+    # print("[INFO] : The contents inside show_image = ", public_urls)
+    return public_urls
+
+
 # @app.route('/fetchdata/<emp_id>')
 @app.route("/fetchdata", methods=['GET','POST'])
 def fetchdata():
@@ -48,12 +61,14 @@ def fetchdata():
             emp_id= cursor.fetchall()  
             
             (id,fname,lname,priSkill,location) = emp_id[0]
+            image_url = show_image(custombucket)
             
-            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location)
+            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url)
         except Exception as e:
             return str(e)
     else:
         return render_template('AddEmp.html', fetchdata=fetchdata)
+
 
 
 
@@ -72,8 +87,6 @@ def AddEmp():
 
         if emp_image_file.filename == "":
             return "Please select a file"
-        # if emp_image_file.filename == "":
-        #     return render_template('GetEmp.html', AddEmp=AddEmp)
 
         try:
 
