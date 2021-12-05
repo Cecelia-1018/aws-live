@@ -33,37 +33,17 @@ def about():
 def GetEmp():
     return render_template('GetEmp.html', GetEmp=GetEmp)
 
-def show_image(custombucket):
-    emp_id = request.form['emp_id']
-    s3 = boto3.client('s3')
-    # public_urls = []
-    object_url = []
-    emp_image_file = request.files['emp_image_file']
-    emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+def show_image(bucket):
+    s3_client = boto3.client('s3')
+    public_urls = []
     try:
-        for emp_image_file_name_in_s3 in s3.list_objects(Bucket=custombucket)['Contents']:
-        #     # if emp_id ==  request.form['emp_id'] :
-        #         presigned_url = s3_client.generate_presigned_url('get_object', Params = {'Bucket': bucket, 'Key': emp_image_file_name_in_s3['Key']}, ExpiresIn = 100)
-        #         public_urls.append(presigned_url)
-            print("Display image from S3...")
-            presigned_url = s3.generate_presigned_url('get_object',Params = {'Bucket': custombucket,'Key': emp_image_file_name_in_s3, 'Body':emp_image_file})
-            # bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
-            # s3_location = (bucket_location['LocationConstraint'])
-            
-            object_url.append(presigned_url)
-        # if s3_location is None:
-        #     s3_location = ''
-        # else:
-        #     s3_location = '-' + s3_location
-
-        # object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
-        #     s3_location,
-        #     custombucket,
-        #     emp_image_file_name_in_s3)
+        for item in s3_client.list_objects(Bucket=bucket)['Contents']:
+            presigned_url = s3_client.generate_presigned_url('get_object', Params = {'Bucket': bucket, 'Key': item['Key']}, ExpiresIn = 100)
+            public_urls.append(presigned_url)
     except Exception as e:
         pass
     # print("[INFO] : The contents inside show_image = ", public_urls)
-    return object_url
+    return public_urls
 
 
 # @app.route('/fetchdata/<emp_id>')
