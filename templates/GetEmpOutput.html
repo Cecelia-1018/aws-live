@@ -103,7 +103,16 @@
 
 				Location:<br> {{ location }} <br><br>
 
-				Image URL: <br> {{ image_url }} <br><br>
+				<!-- Image URL: <br> {{ image_url }} <br><br> -->
+				Image URL: <br>
+				<ul>
+					{% for item in image_url %}
+					  <li>
+						<img src= {{ item }} style="width: 250px">
+					  </li>
+					{% endfor %}
+				  </ul> 
+				<br><br>
 			</div>
 		</form>
 
