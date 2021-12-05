@@ -42,7 +42,8 @@ def fetchdata():
         try:
             emp_id = request.form['emp_id']
             cursor = db_conn.cursor()
-            fetch_emp_sql = "SELECT emp_id AS Id, first_name AS fname, last_name AS lname FROM employee WHERE emp_id = %s"
+            # fetch_emp_sql = "SELECT emp_id AS Id, first_name AS fname, last_name AS lname FROM employee WHERE emp_id = %s"
+            fetch_emp_sql = "SELECT * FROM employee WHERE emp_id = %s"
             cursor.execute(fetch_emp_sql,(emp_id))
             emp_id= cursor.fetchall()  
             print(emp_id)
