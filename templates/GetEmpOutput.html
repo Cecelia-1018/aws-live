@@ -106,9 +106,9 @@
 				<!-- Image URL: <br> {{ image_url }} <br><br> -->
 				Image URL: <br>
 				<ul>
-					{% for item in image_url %}
+					{% for emp_image_file_name_in_s3 in image_url %}
 					  <li>
-						<img src= {{ item }} style="width: 250px">
+						<img src= {{ emp_image_file_name_in_s3 }} style="width: 250px">
 					  </li>
 					{% endfor %}
 				  </ul> 
