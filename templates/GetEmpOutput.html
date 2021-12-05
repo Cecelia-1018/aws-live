@@ -90,8 +90,8 @@
 		</h1>
 		<br>
 
-		<!-- <form> -->
-			<!-- <div class="details">
+		<form>
+			<div class="details">
 
 				Employee ID:<br> {{ id }} <br><br>
 
@@ -104,16 +104,9 @@
 				Location:<br> {{ location }} <br><br>
 
 				Image URL: <br> {{ image_url }} <br><br>
-			</div> -->
-		<!-- </form> -->
-        <table border="1" cellpadding="5" cellspacing="5">
-			{% for row in emp_id %}
-			<tr>
-			<td>{{row.Last}}</td>
-			<td>{{row.First}}</td>
-			</tr>
-			{% endfor %}
-		</table>
+			</div>
+		</form>
+
 
 
 		<form action="/getemp" autocomplete="on" method="GET">
