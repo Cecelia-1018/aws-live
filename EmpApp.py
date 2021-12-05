@@ -47,7 +47,7 @@ def fetchdata():
             emp_id= cursor.fetchall()  
             print(emp_id)
             
-            return render_template('GetEmpOutput.html', emp=emp_id)
+            return render_template('GetEmpOutput.html', id=emp_id)
         except Exception as e:
             return str(e)
     else:
