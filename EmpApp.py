@@ -42,7 +42,24 @@ def fetchdata():
 
         fetch_emp_sql = "SELECT * FROM employee WHERE emp_id = %s"
         cursor.execute(fetch_emp_sql, (emp_id,))
-        emp_id = cursor.fetchone()  
+        # emp_id = cursor.fetchone()  
+        emp_id = cursor.fetchall()  
+
+        e = []
+        ebl = "emp_idfirst_namelast_namepri_skilllocation"
+        e.append(ebl)
+
+        for row in emp_id:
+            a = "%s"%row[0]
+            e.append(a)
+            b = "%s"%row[1]
+            e.append(b)
+            c = "%s"%row[2]
+            e.append(c)
+            d = "%s"%row[3]
+            e.append(d)
+            e1 = "%s"%row[4]
+            e.append(e1)
 
         return render_template('GetEmpOutput.html', employee=emp_id )
     else:
