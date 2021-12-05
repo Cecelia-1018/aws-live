@@ -48,7 +48,7 @@ def fetchdata():
         cursor.execute(fetch_emp_sql, (emp_id, first_name, last_name, pri_skill, location))
         emp_id = cursor.fetchone()  
 
-        return render_template('GetEmpOutput.html', id=int(emp_id) ,fname=first_name,lname=last_name)
+        return render_template('GetEmpOutput.html', id=str(emp_id) ,fname=str(first_name),lname=str(last_name))
     else:
         return render_template('AddEmp.html', fetchdata=fetchdata)
 
