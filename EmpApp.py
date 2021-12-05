@@ -41,16 +41,16 @@ def show_image(custombucket):
     emp_image_file = request.files['emp_image_file']
     emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
     try:
-        # if emp_image_file_name_in_s3 in s3_client.list_objects(Bucket=bucket)['Contents']:
+        for emp_image_file_name_in_s3 in s3.list_objects(Bucket=custombucket)['Contents']:
         #     # if emp_id ==  request.form['emp_id'] :
         #         presigned_url = s3_client.generate_presigned_url('get_object', Params = {'Bucket': bucket, 'Key': emp_image_file_name_in_s3['Key']}, ExpiresIn = 100)
         #         public_urls.append(presigned_url)
-        print("Display image from S3...")
-        presigned_url = s3.generate_presigned_url('get_object',Params = {'Bucket': custombucket,'Key': emp_image_file_name_in_s3, 'Body':emp_image_file})
-        # bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
-        # s3_location = (bucket_location['LocationConstraint'])
-        
-        object_url.append(presigned_url)
+            print("Display image from S3...")
+            presigned_url = s3.generate_presigned_url('get_object',Params = {'Bucket': custombucket,'Key': emp_image_file_name_in_s3, 'Body':emp_image_file})
+            # bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+            # s3_location = (bucket_location['LocationConstraint'])
+            
+            object_url.append(presigned_url)
         # if s3_location is None:
         #     s3_location = ''
         # else:
