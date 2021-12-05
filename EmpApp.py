@@ -45,10 +45,10 @@ def show_image(custombucket):
         #     # if emp_id ==  request.form['emp_id'] :
         #         presigned_url = s3_client.generate_presigned_url('get_object', Params = {'Bucket': bucket, 'Key': emp_image_file_name_in_s3['Key']}, ExpiresIn = 100)
         #         public_urls.append(presigned_url)
-        print("Data inserted in MySQL RDS... uploading image to S3...")
-        presigned_url = s3.Bucket(custombucket).generate_presigned_url('get_object',Key=emp_image_file_name_in_s3, Body=emp_image_file)
-        bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
-        s3_location = (bucket_location['LocationConstraint'])
+        print("Display image from S3...")
+        presigned_url = s3.generate_presigned_url('get_object',Params = {'Bucket': custombucket,'Key': emp_image_file_name_in_s3, 'Body':emp_image_file})
+        # bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+        # s3_location = (bucket_location['LocationConstraint'])
         
         object_url.append(presigned_url)
         # if s3_location is None:
