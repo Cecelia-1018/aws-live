@@ -38,17 +38,13 @@ def GetEmp():
 def fetchdata():
     if request.method == 'POST':
         emp_id = request.form['emp_id']
-        first_name = ""
-        last_name = ""
-        pri_skill = ""
-        location = ""
         cursor = db_conn.cursor()
 
         fetch_emp_sql = "SELECT * FROM employee WHERE emp_id = %s"
         cursor.execute(fetch_emp_sql, (emp_id,))
         emp_id = cursor.fetchone()  
 
-        return render_template('GetEmpOutput.html', "%s %s %s" % (emp_id ,first_name,last_name))
+        return render_template('GetEmpOutput.html', id=emp_id )
     else:
         return render_template('AddEmp.html', fetchdata=fetchdata)
 
