@@ -105,13 +105,13 @@
 
 				<!-- Image URL: <br> {{ image_url }} <br><br> -->
 				Image URL: <br>
-				<ul>
+				
 					{% for emp_image_file_name_in_s3 in image_url %}
-					  <li>
+					 
 						<img src= {{ emp_image_file_name_in_s3 }} style="width: 250px">
-					  </li>
+					  
 					{% endfor %}
-				  </ul> 
+				
 				<br><br>
 			</div>
 		</form>
