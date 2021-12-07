@@ -74,7 +74,7 @@ def fetchdata():
 
 @app.route('/delete-emp', methods=['GET','POST'])
 def DeleteEmp():
-    a,emp_id,b,c,d,e,f = fetchdata()
+    _,emp_id,_,_,_,_,_ = fetchdata()
     mycursor = db_conn.cursor()
     del_emp_sql = "DELETE * FROM employee WHERE emp_id = %s"
     mycursor.execute(del_emp_sql, (emp_id))
