@@ -56,20 +56,16 @@ def show_image(bucket):
 def fetchdata():
     if request.method == 'POST':
         try:
-            
+            emp_id = request.form['emp_id']
             cursor = db_conn.cursor()
-            exist = cursor.fetchall()
-
-            if exist is None:
-               print("does not exist")
+            # fetch_emp_sql = "SELECT emp_id AS Id, first_name AS fname, last_name AS lname FROM employee WHERE emp_id = %s"
+            fetch_emp_sql = "SELECT * FROM employee WHERE emp_id = %s"
+            cursor.execute(fetch_emp_sql,(emp_id))
+            emp_id= cursor.fetchall()  
+            
+            if emp_id is None:
+                print("no exist")
             else:
-                emp_id = request.form['emp_id']
-                
-                # fetch_emp_sql = "SELECT emp_id AS Id, first_name AS fname, last_name AS lname FROM employee WHERE emp_id = %s"
-                fetch_emp_sql = "SELECT * FROM employee WHERE emp_id = %s"
-                cursor.execute(fetch_emp_sql,(emp_id))
-                emp_id= cursor.fetchall()  
-                
                 (id,fname,lname,priSkill,location) = emp_id[0]
                 image_url = show_image(custombucket)
 
