@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from pymysql import connections
 import os
 import boto3
+from werkzeug.datastructures import D
 from config import *
 
 app = Flask(__name__)
@@ -51,14 +52,9 @@ def show_image(bucket):
     # print("[INFO] : The contents inside show_image = ", public_urls)
     return public_urls
 
-def getEmp_id():
-    emp_id = request.form['emp_id']
-    return emp_id
-
-
 # @app.route('/fetchdata/<emp_id>')
 @app.route("/fetchdata", methods=['GET','POST'])
-def fetchdata():
+def fetchdata(emp_id):
     
 
     if request.method == 'POST':
@@ -72,11 +68,8 @@ def fetchdata():
             
             (id,fname,lname,priSkill,location) = emp_id[0]
             image_url = show_image(custombucket)
-            getEmpID = getEmp_id()
-            
-            render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url)
 
-            return getEmpID
+            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url)
         except Exception as e:
             return str(e)
     else:
@@ -84,7 +77,7 @@ def fetchdata():
 
 @app.route('/delete-emp', methods=['GET','POST'])
 def DeleteEmp():
-    emp_id = fetchdata()
+    a,emp_id,b,c,d,e,f = fetchdata()
     mycursor = db_conn.cursor()
     del_emp_sql = "DELETE * FROM employee WHERE emp_id = %s"
     mycursor.execute(del_emp_sql, (emp_id))
