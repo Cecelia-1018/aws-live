@@ -75,8 +75,8 @@ def fetchdata():
             getEmpID = getEmp_id()
             
             render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url)
-            
-            return  getEmpID
+
+            return getEmpID
         except Exception as e:
             return str(e)
     else:
@@ -84,7 +84,7 @@ def fetchdata():
 
 @app.route('/delete-emp', methods=['GET','POST'])
 def DeleteEmp():
-    a,emp_id = fetchdata()
+    emp_id = fetchdata()
     mycursor = db_conn.cursor()
     del_emp_sql = "DELETE * FROM employee WHERE emp_id = %s"
     mycursor.execute(del_emp_sql, (emp_id))
