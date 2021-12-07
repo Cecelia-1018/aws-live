@@ -49,7 +49,7 @@ def show_image(bucket):
     except Exception as e:
         pass
     # print("[INFO] : The contents inside show_image = ", public_urls)
-    return public_urls
+    return public_urls, emp_id
 
 # @app.route('/fetchdata/<emp_id>')
 @app.route("/fetchdata", methods=['GET','POST'])
@@ -74,18 +74,14 @@ def fetchdata():
 
 @app.route('/delete-emp', methods=['GET','POST'])
 def DeleteEmp():
-    _,emp_id,_,_,_,_,_ = fetchdata()
+    *public_urls,emp_id= show_image(bucket)
     mycursor = db_conn.cursor()
     del_emp_sql = "DELETE * FROM employee WHERE emp_id = %s"
-    print(_)
+    print(public_urls)
     mycursor.execute(del_emp_sql, (emp_id))
     db_conn.commit()
    
-    print(_)
-    print(_)
-    print(_)
-    print(_)
-    print(_)
+    
     print(mycursor.rowcount, "record(s) deleted")
     return render_template('GetEmp.html', about=about)
 
