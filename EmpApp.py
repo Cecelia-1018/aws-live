@@ -39,7 +39,7 @@ def show_image(bucket):
     
     #check whether the emp_id inside the image_url
     emp_id = request.form['emp_id']
-
+   
 
     try:
         for item in s3_client.list_objects(Bucket=bucket)['Contents']:
@@ -50,6 +50,10 @@ def show_image(bucket):
         pass
     # print("[INFO] : The contents inside show_image = ", public_urls)
     return public_urls
+
+def getEmp_id():
+    emp_id = request.form['emp_id']
+    return emp_id
 
 
 # @app.route('/fetchdata/<emp_id>')
@@ -68,8 +72,9 @@ def fetchdata():
             
             (id,fname,lname,priSkill,location) = emp_id[0]
             image_url = show_image(custombucket)
-            
-            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url), emp_id
+            getEmpID = getEmp_id()
+
+            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url), getEmpID
         except Exception as e:
             return str(e)
     else:
@@ -77,7 +82,7 @@ def fetchdata():
 
 @app.route('/delete-emp', methods=['GET','POST'])
 def DeleteEmp():
-    emp_id = fetchdata()
+    a,emp_id = fetchdata()
     mycursor = db_conn.cursor()
     del_emp_sql = "DELETE * FROM employee WHERE emp_id = %s"
     mycursor.execute(del_emp_sql, (emp_id))
