@@ -46,15 +46,6 @@
 			border-radius: 5px;
 			background: linear-gradient(135deg, #70e1f5, #ffd194);
 		}
-
-		/* 
-		make content center with card but not beauty
-		.container .details {
-			margin-left: auto;
-			margin-right: auto;
-			display: table;
-		} */
-
 		form .button {
 			height: 45px;
 			margin: 35px 0;
@@ -76,6 +67,28 @@
 
 		form .button input:hover {
 			background: linear-gradient(-135deg, #70e1f5, #ffd194);
+		}
+		form .button1 {
+			height: 45px;
+			margin: 35px 0;
+		}
+
+		form .button1 input {
+			height: 100%;
+			width: 100%;
+			border-radius: 5px;
+			border: none;
+			color: #fff;
+			font-size: 18px;
+			font-weight: 500;
+			letter-spacing: 1px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			background: linear-gradient(135deg, #FF5F6D, #FFC371);
+		}
+
+		form .button1 input:hover {
+			background: linear-gradient(-135deg, #FF5F6D, #FFC371);
 		}
 	</style>
 
@@ -121,6 +134,12 @@
 		<form action="/getemp" autocomplete="on" method="GET">
 			<div class="button">
 				<input type="submit" value="Reset">
+			</div>
+		</form>
+
+		<form action="/delete-emp" method="GET">
+			<div class="button1">
+				<input class="btn" type="submit" name="delete" value="Delete">
 			</div>
 		</form>
 	</div>

@@ -75,7 +75,15 @@ def fetchdata():
     else:
         return render_template('AddEmp.html', fetchdata=fetchdata)
 
-
+@app.route('/delete-emp', methods=['GET','POST'])
+def DeleteEmp(emp_id):
+    
+    mycursor = db_conn.cursor()
+    del_emp_sql = "DELETE * FROM employee WHERE emp_id = %s"
+    mycursor.execute(del_emp_sql, (emp_id))
+    db_conn.commit()
+    print(mycursor.rowcount, "record(s) deleted")
+    return render_template('GetEmp.html', about=about)
 
 
 @app.route("/addemp", methods=['GET','POST'])
