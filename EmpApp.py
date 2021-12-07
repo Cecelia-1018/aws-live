@@ -73,8 +73,10 @@ def fetchdata():
             (id,fname,lname,priSkill,location) = emp_id[0]
             image_url = show_image(custombucket)
             getEmpID = getEmp_id()
-
-            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url), getEmpID
+            
+            render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url)
+            
+            return  getEmpID
         except Exception as e:
             return str(e)
     else:
