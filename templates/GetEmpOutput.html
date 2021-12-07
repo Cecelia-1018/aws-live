@@ -46,6 +46,7 @@
 			border-radius: 5px;
 			background: linear-gradient(135deg, #70e1f5, #ffd194);
 		}
+
 		form .button {
 			height: 45px;
 			margin: 35px 0;
@@ -68,6 +69,7 @@
 		form .button input:hover {
 			background: linear-gradient(-135deg, #70e1f5, #ffd194);
 		}
+
 		form .button1 {
 			height: 45px;
 			margin: 35px 0;
@@ -89,6 +91,57 @@
 
 		form .button1 input:hover {
 			background: linear-gradient(-135deg, #FF5F6D, #FFC371);
+		}
+
+		.button2 {
+			height: 45px;
+			margin: 35px 0;
+		}
+
+		.button2 input {
+			height: 100%;
+			width: 100%;
+			border-radius: 5px;
+			border: none;
+			color: #fff;
+			font-size: 18px;
+			font-weight: 500;
+			letter-spacing: 1px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			background: linear-gradient(135deg, #7F7FD5, #ffd194);
+		}
+
+		.button2 input:hover {
+			background: linear-gradient(-135deg, #7F7FD5, #ffd194);
+		}
+
+		form .input-box {
+			margin-bottom: 15px;
+			width: calc(100% / 2 - 20px);
+		}
+
+		form .input-box {
+			display: block;
+			font-weight: 500;
+			margin-bottom: 5px;
+		}
+
+		.input-box input {
+			height: 45px;
+			width: 100%;
+			outline: none;
+			font-size: 16px;
+			border-radius: 5px;
+			padding-left: 15px;
+			border: 1px solid #ccc;
+			border-bottom-width: 2px;
+			transition: all 0.3s ease;
+		}
+
+		.input-box input:focus,
+		.input-box input:valid {
+			border-color: #FF5F6D;
 		}
 	</style>
 
@@ -118,13 +171,13 @@
 
 				<!-- Image URL: <br> {{ image_url }} <br><br> -->
 				Image URL: <br>
-				
-					{% for emp_image_file_name_in_s3 in image_url %}
-					 
-						<img src= {{ emp_image_file_name_in_s3 }} style="width: 250px">
-					  
-					{% endfor %}
-				
+
+				{% for emp_image_file_name_in_s3 in image_url %}
+
+				<img src={{ emp_image_file_name_in_s3 }} style="width: 250px">
+
+				{% endfor %}
+
 				<br><br>
 			</div>
 		</form>
@@ -136,23 +189,39 @@
 				<input type="submit" value="Reset">
 			</div>
 		</form>
+  
+		<div class="button2">
+			<input class="btn" type="submit" name="more" value="More Action" onclick="myFunction()">
+		</div>
 
-		
+		<div id="more" style="display:none">
+			<form action="/delete-emp" method="POST">
+				<div class="input-box">
+					<label for="suggest_delete">Enter Employee ID for delete:</label>
+					<input type="number" name="emp_id" placeholder="{{id}}">
+				</div>
+				<div class="button1">
+					<input class="btn" type="submit" name="delete" value="Delete">
+				</div>
+			</form>
+		</div>
 
-		<form action="/delete-emp" method="POST">
-			<div>
-				<label for="suggest_delete">Enter Employee ID for delete:</label>
-				<input type="number" name="emp_id" placeholder="{{id}}" >
-			</div>
-			<div class="button1">
-				<input class="btn" type="submit" name="delete" value="Delete">
-			</div>
-		</form>
+		<script>
+			function myFunction() {
+				var x = document.getElementById("more");
+				if (x.style.display === "none") {
+					x.style.display = "block";
+				} else {
+					x.style.display = "none";
+				}
+			}
+		</script>
 
-		
+
 	</div>
 
 	</form>
 
 </body>
+
 </html>
