@@ -49,7 +49,7 @@ def show_image(bucket):
     except Exception as e:
         pass
     # print("[INFO] : The contents inside show_image = ", public_urls)
-    return public_urls, emp_id
+    return public_urls
 
 # @app.route('/fetchdata/<emp_id>')
 @app.route("/fetchdata", methods=['GET','POST'])
