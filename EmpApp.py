@@ -79,7 +79,7 @@ def DeleteEmp():
     del_emp_sql = "DELETE * FROM employee WHERE emp_id = %s"
     mycursor.execute(del_emp_sql, (emp_id))
     db_conn.commit()
-
+    
     return render_template('GetEmp.html', about=about)
 
 
