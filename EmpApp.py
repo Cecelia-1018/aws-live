@@ -77,8 +77,15 @@ def DeleteEmp():
     _,emp_id,_,_,_,_,_ = fetchdata()
     mycursor = db_conn.cursor()
     del_emp_sql = "DELETE * FROM employee WHERE emp_id = %s"
+    print(_)
     mycursor.execute(del_emp_sql, (emp_id))
     db_conn.commit()
+   
+    print(_)
+    print(_)
+    print(_)
+    print(_)
+    print(_)
     print(mycursor.rowcount, "record(s) deleted")
     return render_template('GetEmp.html', about=about)
 
