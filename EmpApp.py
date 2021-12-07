@@ -53,9 +53,7 @@ def show_image(bucket):
 
 # @app.route('/fetchdata/<emp_id>')
 @app.route("/fetchdata", methods=['GET','POST'])
-def fetchdata(emp_id):
-    
-
+def fetchdata():
     if request.method == 'POST':
         try:
             emp_id = request.form['emp_id']
