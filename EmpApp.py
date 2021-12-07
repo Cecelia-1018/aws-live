@@ -63,13 +63,13 @@ def fetchdata():
             cursor.execute(fetch_emp_sql,(emp_id))
             emp_id= cursor.fetchall()  
             
-            if emp_id is None:
-                return render_template('AddEmp.html')
-            else:
-                (id,fname,lname,priSkill,location) = emp_id[0]
+            (id,fname,lname,priSkill,location) = emp_id[0]
+            if emp_id[0]:
                 image_url = show_image(custombucket)
 
                 return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url)
+            else:
+                return render_template('GetEmp.html', about=about)
         except Exception as e:
             return str(e)
     else:
