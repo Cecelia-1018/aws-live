@@ -64,7 +64,7 @@ def fetchdata():
             emp_id= cursor.fetchall()  
             
             if emp_id is None:
-                print("no exist")
+                return render_template('AddEmp.html')
             else:
                 (id,fname,lname,priSkill,location) = emp_id[0]
                 image_url = show_image(custombucket)
