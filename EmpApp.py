@@ -68,7 +68,7 @@ def fetchdata():
 
             return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url)
         except Exception as e:
-            return render_template('AddEmp.html')
+            return render_template('IdNotFound.html')
     else:
         return render_template('AddEmp.html', fetchdata=fetchdata)
 
@@ -80,7 +80,7 @@ def DeleteEmp():
     mycursor.execute(del_emp_sql, (emp_id))
     db_conn.commit()
 
-    return render_template('GetEmp.html', about=about)
+    return render_template('SuccessDelete.html')
 
 
 @app.route("/addemp", methods=['GET','POST'])
