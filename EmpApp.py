@@ -64,14 +64,11 @@ def fetchdata():
             emp_id= cursor.fetchall()  
             
             (id,fname,lname,priSkill,location) = emp_id[0]
-            if emp_id[0]:
-                image_url = show_image(custombucket)
+            image_url = show_image(custombucket)
 
-                return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url)
-            else:
-                return render_template('GetEmp.html', about=about)
+            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url)
         except Exception as e:
-            return str(e)
+            return render_template('AddEmp.html')
     else:
         return render_template('AddEmp.html', fetchdata=fetchdata)
 
