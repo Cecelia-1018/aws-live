@@ -137,14 +137,15 @@
 			</div>
 		</form>
 
-		<script>
-			function myFunction() {
-				var emp_id = prompt("Please enter employee id for delete", "{{ id }}");
-				document.write(emp_id);
-			}
-		</script>
+		
 
 		<form action="/delete-emp" method="GET">
+			<script>
+				function myFunction() {
+					var emp_id = prompt("Please enter employee id for delete", "{{ id }}");
+					document.write(emp_id);
+				}
+			</script>
 			<div class="button1">
 				<input class="btn" type="submit" name="emp_id" value="Delete" onclick="myFunction()">
 				<p></p>
