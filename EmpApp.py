@@ -69,15 +69,15 @@ def fetchdata():
             (id,fname,lname,priSkill,location) = emp_id[0]
             image_url = show_image(custombucket)
             
-            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url)
+            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url), emp_id
         except Exception as e:
             return str(e)
     else:
         return render_template('AddEmp.html', fetchdata=fetchdata)
 
 @app.route('/delete-emp', methods=['GET','POST'])
-def DeleteEmp(emp_id):
-    
+def DeleteEmp():
+    emp_id = fetchdata()
     mycursor = db_conn.cursor()
     del_emp_sql = "DELETE * FROM employee WHERE emp_id = %s"
     mycursor.execute(del_emp_sql, (emp_id))
