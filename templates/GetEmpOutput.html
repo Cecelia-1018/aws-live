@@ -143,6 +143,38 @@
 		.input-box input:valid {
 			border-color: #FF5F6D;
 		}
+
+		.tab {
+			overflow: hidden;
+			border: 1px solid #ccc;
+			background-color: #f1f1f1;
+		}
+
+		.tab button {
+			background-color: inherit;
+			float: left;
+			border: none;
+			outline: none;
+			cursor: pointer;
+			padding: 14px 16px;
+			transition: 0.3s;
+			font-size: 17px;
+		}
+
+		.tab button:hover {
+			background-color: #ddd;
+		}
+
+		.tab button.active {
+			background-color: #ccc;
+		}
+
+		.tabcontent {
+			display: none;
+			padding: 6px 12px;
+			border: 1px solid #ccc;
+			border-top: none;
+		}
 	</style>
 
 	<title>Employee Information</title>
@@ -189,21 +221,47 @@
 				<input type="submit" value="Reset">
 			</div>
 		</form>
-  
+
 		<div class="button2">
 			<input class="btn" type="submit" name="more" value="More Action" onclick="myFunction()">
 		</div>
 
 		<div id="more" style="display:none">
-			<form action="/delete-emp" method="POST">
-				<div class="input-box">
-					<label for="suggest_delete">Enter Employee ID for delete:</label>
-					<input type="number" name="emp_id" placeholder="{{id}}" required>
-				</div>
-				<div class="button1">
-					<input class="btn" type="submit" name="delete" value="Delete">
-				</div>
-			</form>
+			<div class="tab">
+				<button class="tablinks" onclick="openAction(event, 'Edit')">Edit</button>
+				<button class="tablinks" onclick="openAction(event, 'Delete')">Delete</button>
+			</div>
+
+		
+			<div id="Delete" class="tabcontent">
+				<br>
+				<form action="/delete-emp" method="POST">
+					<div class="input-box">
+						<label for="suggest_delete">Enter Employee ID for delete:</label>
+						<input type="number" name="emp_id" placeholder="{{id}}" required>
+					</div>
+					<div class="button1">
+						<input class="btn" type="submit" name="delete" value="Delete">
+					</div>
+				</form>
+			</div>
+
+			<script>
+				function openAction(evt, actionName) {
+					var i, tabcontent, tablinks;
+					tabcontent = document.getElementsByClassName("tabcontent");
+					for (i = 0; i < tabcontent.length; i++) {
+						tabcontent[i].style.display = "none";
+					}
+					tablinks = document.getElementsByClassName("tablinks");
+					for (i = 0; i < tablinks.length; i++) {
+						tablinks[i].className = tablinks[i].className.replace(" active", "");
+					}
+					document.getElementById(actionName).style.display = "block";
+					evt.currentTarget.className += " active";
+				}
+			</script>
+
 		</div>
 
 		<script>
