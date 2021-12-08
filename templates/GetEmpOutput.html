@@ -175,6 +175,14 @@
 			border: 1px solid #ccc;
 			border-top: none;
 		}
+
+		#pic {
+			/* float: left; */
+			width: 150px;
+			height: 150px;
+			border-radius: 50%;
+			margin-left: 50px;
+		}
 	</style>
 
 	<title>Employee Information</title>
@@ -232,7 +240,66 @@
 				<button class="tablinks" onclick="openAction(event, 'Delete')">Delete</button>
 			</div>
 
-		
+			<div id="Edit" class="tabcontent">
+				<br>
+				<form action="/editemp" autocomplete="on" method="POST" enctype="multipart/form-data">
+
+
+					<div class="employee-details">
+
+						<div class="input-box-image">
+							<span class="details"></span>
+							<img id="pic" src={{ emp_image_file_name_in_s3 }} alt="employee-image" />
+							<input type=file name="emp_image_file"
+								oninput="pic.src=window.URL.createObjectURL(this.files[0])" required>
+							<br>
+						</div>
+
+
+						<div class="input-box">
+							<span class="details">Employee ID:</span>
+							<input type="number" name="emp_id" value="{{ id }}" placeholder="Enter ID" required>
+						</div>
+
+						<div class="input-box">
+							<span class="details">First Name:</span>
+							<input type="text" name="first_name" value="{{ fname }}" placeholder="Enter First Name"
+								required>
+						</div>
+
+						<div class="input-box">
+							<span class="details">Last Name:</span>
+							<input type="text" name="last_name" value="{{ lname }}" placeholder="Enter Last Name"
+								required>
+						</div>
+
+						<div class="input-box">
+							<span class="details">Primary Skills:</span>
+							<input type="text" name="pri_skill" value="{{ priSkill }}"
+								placeholder="Enter Primary Skills" required>
+						</div>
+
+						<div class="input-box">
+							<span class="details">Location:</span>
+							<input type="text" name="location" value="{{ location }}" placeholder="Enter Location"
+								required>
+						</div>
+
+
+					</div>
+
+					<div class="button1">
+						<input type="submit" value="Update Database">
+					</div>
+
+					<div class="button">
+						<input type="reset" value="Reset">
+					</div>
+				</form>
+
+			</div>
+
+
 			<div id="Delete" class="tabcontent">
 				<br>
 				<form action="/delete-emp" method="POST">
