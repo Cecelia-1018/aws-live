@@ -3,6 +3,7 @@ from pymysql import connections
 import os
 import boto3
 from config import *
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -95,29 +96,23 @@ def DeleteEmp():
 @app.route("/addemp", methods=['GET','POST'])
 def AddEmp():
     if request.method == 'POST':
-        emp_id = request.form['emp_id']
+
+        # datetime object containing current date and time
+        now = datetime.now()
+        dt_string = now.strftime("%d%m%Y%H%M%S")
+
+        emp_id = request.form['emp_id'] + "_" + dt_string
         first_name = request.form['first_name']
         last_name = request.form['last_name']
         pri_skill = request.form['pri_skill']
         location = request.form['location']
         emp_image_file = request.files['emp_image_file']
 
-        #check duplicate id exist
+        insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
         cursor = db_conn.cursor()
-        fetch_emp_sql = "SELECT emp_id FROM employee WHERE emp_id = %s" 
-        cursor.execute(fetch_emp_sql,(emp_id))
-        emp= cursor.fetchall()  
-        (id) = emp[0]
 
-        if emp_id == id :
-            msg = "Please enter other ID, duplicate id not accepted"
-            return render_template('AddEmp.html', msg=msg)
-        else:
-            insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
-            cursor = db_conn.cursor()
-
-            if emp_image_file.filename == "":
-                return "Please select a file"
+        if emp_image_file.filename == "":
+            return "Please select a file"
 
         try:
 
@@ -152,7 +147,7 @@ def AddEmp():
             cursor.close()
 
         print("all modification done...")
-        return render_template('AddEmpOutput.html', name=emp_name)
+        return render_template('AddEmpOutput.html', name=emp_name, id=emp_id)
     else:
         return render_template('GetEmp.html', AddEmp=AddEmp)
 
