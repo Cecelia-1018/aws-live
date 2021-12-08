@@ -203,7 +203,7 @@ def EditEmp():
             cursor.close()
 
         print("all modification done...")
-        return render_template('AddEmpOutput.html', name=emp_name)
+        return render_template('AddEmpOutput.html', name=emp_name, object_url=object_url)
     else:
         return render_template('GetEmp.html', AddEmp=AddEmp)
 

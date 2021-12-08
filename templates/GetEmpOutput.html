@@ -258,7 +258,8 @@
 							<img id="pic" src={{ emp_image_file_name_in_s3 }} alt="employee-image" />
 							
 							<input type=file name="emp_image_file"
-								oninput="pic.src=window.URL.createObjectURL(this.files[0])" value ="{{ image_file }}">
+								oninput="pic.src=window.URL.createObjectURL(this.files[0])" value ="{{ object_url }}">
+								{{object_url}}
 							{% endfor %}
 							<br>
 						</div>
