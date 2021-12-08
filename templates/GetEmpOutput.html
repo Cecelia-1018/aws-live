@@ -258,13 +258,13 @@
 							<img id="pic" src={{ emp_image_file_name_in_s3 }} alt="employee-image" />
 							{% endfor %}
 							<input type=file name="emp_image_file"
-								oninput="pic.src=window.URL.createObjectURL(this.files[0])">
+								oninput="pic.src=window.URL.createObjectURL(this.files[0])" value ="{{ image_url }}">
 							<br>
 						</div>
 
 
 						<div class="input-box">
-							<span class="details">Employee ID: {{ id }}</span>
+							<span class="details">Employee ID: </span>
 							<input type="number" name="emp_id" value="{{ id }}" type="hidden">
 							<h6 style="color:#FF5733;">You're not required to change the Employee Id.</h6>
 						</div>
