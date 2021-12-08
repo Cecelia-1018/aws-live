@@ -109,7 +109,7 @@ def AddEmp():
         emp= cursor.fetchall()  
         (id) = emp[0]
 
-        if(id == emp_id):
+        if emp_id == id :
             msg = "Please enter other ID, duplicate id not accepted"
             return render_template('AddEmp.html', msg=msg)
         else:
