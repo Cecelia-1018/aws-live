@@ -65,13 +65,7 @@ def fetchdata():
             (id,fname,lname,priSkill,location) = emp[0]
             image_url = show_image(custombucket)
 
-            # image file in S3 #
-            emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
-
-            # For display the image file purpose
-            image_file = emp_image_file_name_in_s3 + ".jpg"
-
-            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url ,image_file=image_file)
+            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url)
         except Exception as e:
             return render_template('IdNotFound.html')
     else:
@@ -171,39 +165,41 @@ def EditEmp():
             cursor.execute(update_sql, (changefield))
             db_conn.commit()
             emp_name = "" + first_name + " " + last_name
-            
-            # Delete previous version of image in s3 then upload the new one (avoid of mutiple version store in s3)
-            s3_client = boto3.client('s3')
-            emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
-            s3_client.delete_object(Bucket=custombucket, Key = emp_image_file_name_in_s3) 
 
-            # Uplaod image file in S3 #
-            s3 = boto3.resource('s3')
+            #if user upload new image 
+            if len(emp_image_file) :
+                # Delete previous version of image in s3 then upload the new one (avoid of mutiple version store in s3)
+                s3_client = boto3.client('s3')
+                emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+                s3_client.delete_object(Bucket=custombucket, Key = emp_image_file_name_in_s3) 
 
-            try:
-                print("Data inserted in MySQL RDS... uploading image to S3...")
-                s3.Bucket(custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image_file)
-                bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
-                s3_location = (bucket_location['LocationConstraint'])
+                # Uplaod image file in S3 #
+                s3 = boto3.resource('s3')
 
-                if s3_location is None:
-                    s3_location = ''
-                else:
-                    s3_location = '-' + s3_location
+                try:
+                    print("Data inserted in MySQL RDS... uploading image to S3...")
+                    s3.Bucket(custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image_file)
+                    bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+                    s3_location = (bucket_location['LocationConstraint'])
 
-                object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
-                    s3_location,
-                    custombucket,
-                    emp_image_file_name_in_s3)
+                    if s3_location is None:
+                        s3_location = ''
+                    else:
+                        s3_location = '-' + s3_location
 
-            except Exception as e:
-                return str(e)
+                    object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                        s3_location,
+                        custombucket,
+                        emp_image_file_name_in_s3)
+
+                except Exception as e:
+                    return str(e)
 
         finally:
             cursor.close()
 
         print("all modification done...")
-        return render_template('AddEmpOutput.html', name=emp_name, object_url=object_url)
+        return render_template('AddEmpOutput.html', name=emp_name)
     else:
         return render_template('GetEmp.html', AddEmp=AddEmp)
 
