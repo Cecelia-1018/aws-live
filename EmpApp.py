@@ -167,7 +167,10 @@ def EditEmp():
             emp_name = "" + first_name + " " + last_name
 
             #if user upload new image 
-            if len(emp_image_file) :
+            if emp_image_file.filename == "":
+                print("select nothing")
+            
+            else:
                 # Delete previous version of image in s3 then upload the new one (avoid of mutiple version store in s3)
                 s3_client = boto3.client('s3')
                 emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
