@@ -144,6 +144,59 @@ def AddEmp():
     else:
         return render_template('GetEmp.html', AddEmp=AddEmp)
 
+@app.route("/editemp", methods=['GET','POST'])
+def EditEmp():
+    if request.method == 'POST':
+        emp_id = request.form['emp_id']
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+        pri_skill = request.form['pri_skill']
+        location = request.form['location']
+        emp_image_file = request.files['emp_image_file']
+
+        update_sql = "UPDATE employee SET emp_id = %s,first_name = %s, last_name = %s, pri_skill = %s, location = %s WHERE emp_id = %s"
+        cursor = db_conn.cursor()
+
+        try:
+            cursor.execute(update_sql, (emp_id, first_name, last_name, pri_skill, location))
+            db_conn.commit()
+            emp_name = "" + first_name + " " + last_name
+            
+            # Delete previous version of image in s3 then upload the new one (avoid of mutiple version store in s3)
+            s3_client = boto3.client('s3')
+            emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+            s3_client.delete_object(Bucket=custombucket, Key = emp_image_file_name_in_s3) 
+
+            # Uplaod image file in S3 #
+            s3 = boto3.resource('s3')
+
+            try:
+                print("Data inserted in MySQL RDS... uploading image to S3...")
+                s3.Bucket(custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image_file)
+                bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+                s3_location = (bucket_location['LocationConstraint'])
+
+                if s3_location is None:
+                    s3_location = ''
+                else:
+                    s3_location = '-' + s3_location
+
+                object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                    s3_location,
+                    custombucket,
+                    emp_image_file_name_in_s3)
+
+            except Exception as e:
+                return str(e)
+
+        finally:
+            cursor.close()
+
+        print("all modification done...")
+        return render_template('AddEmpOutput.html', name=emp_name)
+    else:
+        return render_template('GetEmp.html', AddEmp=AddEmp)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
