@@ -102,11 +102,22 @@ def AddEmp():
         location = request.form['location']
         emp_image_file = request.files['emp_image_file']
 
-        insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
+        #check duplicate id exist
         cursor = db_conn.cursor()
+        fetch_emp_sql = "SELECT emp_id FROM employee WHERE emp_id = %s" 
+        cursor.execute(fetch_emp_sql,(emp_id))
+        emp= cursor.fetchall()  
+        (id) = emp[0]
 
-        if emp_image_file.filename == "":
-            return "Please select a file"
+        if(id == emp_id):
+            msg = "Please enter other ID, duplicate id not accepted"
+            return render_template('AddEmp.html', msg=msg)
+        else:
+            insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
+            cursor = db_conn.cursor()
+
+            if emp_image_file.filename == "":
+                return "Please select a file"
 
         try:
 
