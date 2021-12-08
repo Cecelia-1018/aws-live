@@ -138,7 +138,7 @@ def AddEmp():
                 object_url = "https://s3{0}.amazonaws.com/{1}/{2}{3}".format(
                     s3_location,
                     custombucket,
-                    emp_image_file_name_in_s3,".jpg")
+                    emp_image_file_name_in_s3)
 
             except Exception as e:
                 return str(e)
@@ -147,7 +147,7 @@ def AddEmp():
             cursor.close()
 
         print("all modification done...")
-        return render_template('AddEmpOutput.html', name=emp_name, id=emp_id ,object_url=object_url)
+        return render_template('AddEmpOutput.html', name=emp_name, id=emp_id)
     else:
         return render_template('GetEmp.html', AddEmp=AddEmp)
 
