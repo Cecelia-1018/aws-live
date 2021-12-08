@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+        body {
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+        }
+
+        html {
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        .column {
+            float: left;
+            width: 50%;
+            margin-bottom: 16px;
+            padding: 0 20px;
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            margin: 8px;
+        }
+
+        .about-section {
+            padding: 50px;
+            text-align: center;
+            background: linear-gradient(135deg, #70e1f5, #ffd194);
+            color: black;
+        }
+
+        .container {
+            padding: 0 16px;
+        }
+
+        .container::after,
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .title {
+            color: grey;
+        }
+
+
+        form .button {
+            height: 45px;
+            margin: 20px 20px 20px 20px;
+            
+        }
+
+        form .button input {
+            height: 100%;
+            width: 100%;
+            border-radius: 5px;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #70e1f5, #ffd194);
+        }
+
+        form .button input:hover {
+            background: linear-gradient(-135deg, #70e1f5, #ffd194);
+        }
+
+        @media screen and (max-width: 650px) {
+            .column {
+                width: 100%;
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="about-section">
+        <h1>About Us</h1>
+        <p>An Employee Database Management System is created by us.</p>
+        <p>The tools of development include AWS services such as EC2, RDS, S3, Auto Scaling, Elastic Load Balancer and
+            Cloud Watch. My SQL is used as database, front-end with using HTML,CSS and Javascript, backend using flask
+            with python.</p>
+    </div>
+
+    <h2 style="text-align:center">Our Team</h2>
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <img src="https://openmoji.org/data/color/svg/1F467.svg" alt="Jane" width="300" height="300">
+                <div class="container">
+                    <h2>Cecelia Lim</h2>
+                    <p class="title">Leader</p>
+                    <p>Learning Cloud Computing is fun!</p>
+                    <p><a href="mailto: cecelialjs-wm19@student.tarc.edu.my">Contact</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <img src="https://openmoji.org/data/color/svg/1F466.svg" alt="Mike" width="300" height="300">
+                <div class="container">
+                    <h2>Ramanathan</h2>
+                    <p class="title">Member</p>
+                    <p>Never give up on learning!</p>
+                    <p><a href="mailto:palaniappan-wm19@student.tarc.edu.my">Contact</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form action="/" autocomplete="on" method="POST">
+        <div class="button">
+            <input type="submit" value="Go Back">
+        </div>
+        <br>
+    </form>
+
+</body>
+
+</html>

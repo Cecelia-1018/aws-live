@@ -28,11 +28,11 @@ def home():
 
 @app.route("/about", methods=['GET','POST'])
 def about():
-    return render_template('GetEmp.html', about=about)
+    return render_template('AboutUs.html')
 
 @app.route("/getemp", methods=['GET','POST'])
 def GetEmp():
-    return render_template('GetEmp.html', GetEmp=GetEmp)
+    return render_template('GetEmp.html')
 
 def show_image(bucket):
     s3_client = boto3.client('s3')
