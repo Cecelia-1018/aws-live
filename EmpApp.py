@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,url_for
 from pymysql import connections
 import os
 import boto3
+from werkzeug.utils import redirect
 from config import *
 from datetime import datetime
 
@@ -208,7 +209,8 @@ def EditEmp():
             cursor.close()
 
         print("all modification done...")
-        return render_template('AddEmpOutput.html', name=emp_name,id=emp_id)
+        # return render_template('GetEmpOutput.html', name=emp_name,id=emp_id)
+        return redirect (url_for("GetEmpOutput.html"))
     else:
         return render_template('GetEmp.html', AddEmp=AddEmp)
 
