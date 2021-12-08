@@ -72,7 +72,7 @@ def fetchdata():
         return render_template('AddEmp.html', fetchdata=fetchdata)
 
 @app.route('/delete-emp', methods=['GET','POST'])
-def DeleteEmp(bucket):
+def DeleteEmp():
     emp_id= request.form['emp_id']
     mycursor = db_conn.cursor()
     del_emp_sql = "DELETE FROM employee WHERE emp_id = %s"
@@ -83,7 +83,7 @@ def DeleteEmp(bucket):
     s3_client = boto3.client('s3')
     emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
     try:
-        s3_client.delete_object(Bucket=bucket, Key = emp_image_file_name_in_s3)    
+        s3_client.delete_object(Bucket=custombucket, Key = emp_image_file_name_in_s3)    
         return render_template('SuccessDelete.html')
     except Exception as e:
         return render_template('UnsuccessDelete.html')
