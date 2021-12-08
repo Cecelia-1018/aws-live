@@ -207,7 +207,7 @@
 				{% for emp_image_file_name_in_s3 in image_url %}
 
 				<img id="pic" src={{ emp_image_file_name_in_s3 }}>
-
+                {{ image_file }}
 				{% endfor %}
 				<br><br>
 
@@ -258,7 +258,7 @@
 							<img id="pic" src={{ emp_image_file_name_in_s3 }} alt="employee-image" />
 							
 							<input type=file name="emp_image_file"
-								oninput="pic.src=window.URL.createObjectURL(this.files[0])" value ="{{ emp_image_file_name_in_s3 }}">
+								oninput="pic.src=window.URL.createObjectURL(this.files[0])" value ="{{ image_file }}">
 							{% endfor %}
 							<br>
 						</div>

@@ -65,7 +65,13 @@ def fetchdata():
             (id,fname,lname,priSkill,location) = emp_id[0]
             image_url = show_image(custombucket)
 
-            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url)
+            # image file in S3 #
+            emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+
+            # For display the image file purpose
+            image_file = emp_image_file_name_in_s3 + ".jpg"
+
+            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url ,image_file=image_file)
         except Exception as e:
             return render_template('IdNotFound.html')
     else:
@@ -115,6 +121,7 @@ def AddEmp():
             emp_name = "" + first_name + " " + last_name
             # Uplaod image file in S3 #
             emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+
             s3 = boto3.resource('s3')
 
             try:
