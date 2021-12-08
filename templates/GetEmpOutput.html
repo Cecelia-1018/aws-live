@@ -149,6 +149,17 @@
 			border-color: #FF5F6D;
 		}
 
+		.input-box-transparent  {
+			color:#fff;
+		}
+
+		.input-box-transparent input:valid {
+			color:#fff;
+			border: 1px solid #fff;
+			border-color: #fff;
+			
+		}
+
 		.tab {
 			overflow: hidden;
 			border: 1px solid #ccc;
@@ -263,10 +274,9 @@
 						</div>
 
 
-						<div class="input-box">
+						<div class="input-box-transparent">
 							<span class="details">Employee ID: </span>
-							<input type="number" name="emp_id" value="{{ id }}" disabled>
-							<h6 style="color:#FF5733;">You're not required to change the Employee Id.</h6>
+							<input  type="number" name="emp_id" value="{{ id }}"  >
 						</div>
 
 						<div class="input-box">
