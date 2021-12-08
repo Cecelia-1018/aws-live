@@ -28,11 +28,11 @@ def home():
 
 @app.route("/about", methods=['GET','POST'])
 def about():
-    return render_template('AboutUs.html')
+    return render_template('GetEmp.html', about=about)
 
 @app.route("/getemp", methods=['GET','POST'])
 def GetEmp():
-    return render_template('GetEmp.html')
+    return render_template('GetEmp.html', GetEmp=GetEmp)
 
 def show_image(bucket):
     s3_client = boto3.client('s3')
@@ -101,7 +101,7 @@ def AddEmp():
         now = datetime.now()
         dt_string = now.strftime("%d%m%Y%H%M%S")
 
-        emp_id = request.form['emp_id'] + "_" + dt_string
+        emp_id = request.form['emp_id'] + dt_string
         first_name = request.form['first_name']
         last_name = request.form['last_name']
         pri_skill = request.form['pri_skill']
@@ -135,7 +135,7 @@ def AddEmp():
                 else:
                     s3_location = '-' + s3_location
 
-                object_url = "https://s3{0}.amazonaws.com/{1}/{2}{3}".format(
+                object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
                     s3_location,
                     custombucket,
                     emp_image_file_name_in_s3)
