@@ -60,9 +60,9 @@ def fetchdata():
             # fetch_emp_sql = "SELECT emp_id AS Id, first_name AS fname, last_name AS lname FROM employee WHERE emp_id = %s"
             fetch_emp_sql = "SELECT * FROM employee WHERE emp_id = %s"
             cursor.execute(fetch_emp_sql,(emp_id))
-            emp_id= cursor.fetchall()  
+            emp= cursor.fetchall()  
             
-            (id,fname,lname,priSkill,location) = emp_id[0]
+            (id,fname,lname,priSkill,location) = emp[0]
             image_url = show_image(custombucket)
 
             # image file in S3 #
