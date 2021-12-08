@@ -65,13 +65,13 @@ def fetchdata():
             (id,fname,lname,priSkill,location) = emp[0]
             image_url = show_image(custombucket)
 
-            # # image file in S3 #
-            # emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+            # image file in S3 #
+            emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
 
-            # # For display the image file purpose
-            # image_file = emp_image_file_name_in_s3 + ".jpg"
+            # For display the image file purpose
+            image_file = emp_image_file_name_in_s3 + ".jpg"
 
-            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url)
+            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url ,image_file=image_file)
         except Exception as e:
             return render_template('IdNotFound.html')
     else:
@@ -195,8 +195,6 @@ def EditEmp():
                     s3_location,
                     custombucket,
                     emp_image_file_name_in_s3)
-                
-
 
             except Exception as e:
                 return str(e)
@@ -205,7 +203,7 @@ def EditEmp():
             cursor.close()
 
         print("all modification done...")
-        return render_template('AddEmpOutput.html', name=emp_name, image_file = object_url)
+        return render_template('AddEmpOutput.html', name=emp_name)
     else:
         return render_template('GetEmp.html', AddEmp=AddEmp)
 
