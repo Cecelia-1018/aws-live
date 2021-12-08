@@ -199,6 +199,14 @@
 		<form>
 			<div class="details">
 
+				Image:
+
+				{% for emp_image_file_name_in_s3 in image_url %}
+
+				<img  id="pic" src={{ emp_image_file_name_in_s3 }}>
+
+				{% endfor %}
+
 				Employee ID:<br> {{ id }} <br><br>
 
 				First Name:<br> {{ fname }} <br><br>
@@ -210,14 +218,7 @@
 				Location:<br> {{ location }} <br><br>
 
 				<!-- Image URL: <br> {{ image_url }} <br><br> -->
-				Image: <br>
-
-				{% for emp_image_file_name_in_s3 in image_url %}
-
-				<img  id="pic" src={{ emp_image_file_name_in_s3 }}>
-
-				{% endfor %}
-
+				
 				<br><br>
 			</div>
 		</form>
@@ -307,7 +308,7 @@
 				<form action="/delete-emp" method="POST">
 					<div class="input-box">
 						<label for="suggest_delete">Enter Employee ID for delete:</label>
-						<input type="number" name="emp_id" placeholder="{{id}}" required>
+						<input type="number" name="emp_id" value="{{id}}" required>
 					</div>
 					<div class="button1">
 						<input class="btn" type="submit" name="delete" value="Delete">
