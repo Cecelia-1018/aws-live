@@ -39,7 +39,6 @@ def show_image(bucket):
     
     #check whether the emp_id inside the image_url
     emp_id = request.form['emp_id']
-   
 
     try:
         for item in s3_client.list_objects(Bucket=bucket)['Contents']:
@@ -79,6 +78,19 @@ def DeleteEmp():
     del_emp_sql = "DELETE FROM employee WHERE emp_id = %s"
     mycursor.execute(del_emp_sql, (emp_id))
     db_conn.commit()
+    
+    public_urls = []
+    s3_client = boto3.client('s3')
+    try:
+        for item in s3_client.list_objects(Bucket=bucket)['Contents']:
+            presigned_url = s3_client.delete_object('get_object', Params = {'Bucket': bucket, 'Key': item['Key']}, ExpiresIn = 100)
+            if emp_id in presigned_url:
+               public_urls.append(presigned_url)
+            return True
+    except Exception as e:
+        print(str(e))
+        return False
+
 
     return render_template('SuccessDelete.html')
 
