@@ -72,23 +72,21 @@ def fetchdata():
         return render_template('AddEmp.html', fetchdata=fetchdata)
 
 @app.route('/delete-emp', methods=['GET','POST'])
-def DeleteEmp():
+def DeleteEmp(bucket):
     emp_id= request.form['emp_id']
     mycursor = db_conn.cursor()
     del_emp_sql = "DELETE FROM employee WHERE emp_id = %s"
     mycursor.execute(del_emp_sql, (emp_id))
     db_conn.commit()
     
-    public_urls = []
+
     s3_client = boto3.client('s3')
+    emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
     try:
-        for item in s3_client.list_objects(Bucket=bucket)['Contents']:
-            presigned_url = s3_client.delete_object('get_object', Params = {'Bucket': bucket, 'Key': item['Key']}, ExpiresIn = 100)
-            if emp_id in presigned_url:
-               public_urls.append(presigned_url)
-            return render_template('SuccessDelete.html')
+        s3_client.delete_object(Bucket=bucket, Key = emp_image_file_name_in_s3)    
+        return render_template('SuccessDelete.html')
     except Exception as e:
-        return render_template('IdNotFound.html')
+        return render_template('UnsuccessDelete.html')
 
 
     # return render_template('SuccessDelete.html')
