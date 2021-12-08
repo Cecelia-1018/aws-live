@@ -86,13 +86,12 @@ def DeleteEmp():
             presigned_url = s3_client.delete_object('get_object', Params = {'Bucket': bucket, 'Key': item['Key']}, ExpiresIn = 100)
             if emp_id in presigned_url:
                public_urls.append(presigned_url)
-            return True
+            return render_template('SuccessDelete.html')
     except Exception as e:
-        print(str(e))
-        return False
+        return render_template('IdNotFound.html')
 
 
-    return render_template('SuccessDelete.html')
+    # return render_template('SuccessDelete.html')
 
 
 @app.route("/addemp", methods=['GET','POST'])
