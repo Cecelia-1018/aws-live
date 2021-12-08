@@ -199,13 +199,12 @@
 		<form>
 			<div class="details">
 
-				Image:
-
 				{% for emp_image_file_name_in_s3 in image_url %}
 
-				<img  id="pic" src={{ emp_image_file_name_in_s3 }}>
+				<img id="pic" src={{ emp_image_file_name_in_s3 }}>
 
 				{% endfor %}
+				<br><br>
 
 				Employee ID:<br> {{ id }} <br><br>
 
@@ -215,10 +214,10 @@
 
 				Primary Interest:<br> {{ priSkill }} <br><br>
 
-				Location:<br> {{ location }} <br><br>
+				Location:<br> {{ location }}
 
 				<!-- Image URL: <br> {{ image_url }} <br><br> -->
-				
+
 				<br><br>
 			</div>
 		</form>
