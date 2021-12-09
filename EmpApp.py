@@ -91,22 +91,12 @@ def DeleteEmp():
 
 @app.route('/view-attendance', methods=['GET','POST'])
 def ViewAttendance():
-    if request.method == 'POST':
-        try:
-            att_emp_sql = "SELECT * FROM attendance"
-            cursor = db_conn.cursor()
-            cursor.execute(att_emp_sql)
-
-            att_result= cursor.fetchall()  
-
-            # for x in att_result:
-            #     print(x)
-            
-            return render_template('ViewAttendance.html', att_result=att_result)
-        except Exception as e:
-            return render_template('IdNotFound.html')
-    else:
-        return render_template('AddEmp.html', fetchdata=fetchdata)
+    att_emp_sql = "SELECT * FROM attendance"
+    cursor = db_conn.cursor()
+    cursor.execute(att_emp_sql)
+    att_result= cursor.fetchall()  
+    return render_template('ViewAttendance.html', att_result=att_result)
+        
 
 
         

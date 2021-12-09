@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<style>
 		@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
 		* {
 			margin: 0;
 			padding: 0;
 			box-sizing: border-box;
 			font-family: "Poppins", sans-serif;
 		}
+
 		body {
 			height: 100vh;
 			display: flex;
@@ -17,6 +20,7 @@
 			padding: 10px;
 			background: linear-gradient(135deg, #70e1f5, #ffd194);
 		}
+
 		.container {
 			max-width: 700px;
 			width: 100%;
@@ -26,10 +30,12 @@
 			box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 
 		}
+
 		.container .title {
 			font-weight: 1000;
 			position: relative;
 		}
+
 		.container .title::before {
 			content: "";
 			position: absolute;
@@ -40,6 +46,7 @@
 			border-radius: 5px;
 			background: linear-gradient(135deg, #70e1f5, #ffd194);
 		}
+
 		form .button {
 			height: 45px;
 			margin: 35px 0;
@@ -62,29 +69,29 @@
 		form .button input:hover {
 			background: linear-gradient(-135deg, #70e1f5, #ffd194);
 		}
-
-	</style>	
+	</style>
 </head>
-	
-		<body>
-			<div class="container">
-			<h1>
-				<div class="title">Attendance List</div>
-			</h1>
-			<br>
-			<h2>Following Employee Attendance record.</h2><br>
 
-			{% for attendance in att_result %}
-				{{attendance}}
-			{% endfor %}
+<body>
+	<div class="container">
+		<h1>
+			<div class="title">Attendance List</div>
+		</h1>
+		<br>
+		<h2>Following Employee Attendance record.</h2><br>
 
-			<title>Attendance Emp Output</title>
-				<form action="/addemp" autocomplete="on" method = "POST">
-					<div class="button">
-						<input type="submit" value="Go Back">
-					</div>
-				</form>
+		{% for attendance in att_result %}
+		{{attendance}}
+		{% endfor %}
+
+		<title>Attendance Emp Output</title>
+		<form action="/" autocomplete="on" method="POST">
+			<div class="button">
+				<input type="submit" value="Go Back">
 			</div>
-		</body>
-	
+			<br>
+		</form>
+	</div>
+</body>
+
 </html>
