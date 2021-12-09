@@ -119,14 +119,14 @@ def AttendanceEmp():
             cursor.execute(insert_att_sql, (attendance_id,date,time,att_values,emp_id))
             db_conn.commit()
 
-            return 'Your attentance record to mysql database!'
+            return render_template('ViewAttendance.html')
         except Exception as e:
                 return str(e)
 
         finally:
             cursor.close()
 
-    return render_template('AddEmp.html')
+    
 
 
 
