@@ -247,27 +247,27 @@
 					{% endfor %}
 					<br><br>
 
-					Employee ID:<br> {{ id }} <br><br>
+					<b>Employee ID:</b><br> {{ id }} <br><br>
 
-					First Name:<br> {{ fname }} <br><br>
+					<b>First Name:</b><br> {{ fname }} <br><br>
 
-					Last Name:<br> {{ lname }} <br><br>
+					<b>Last Name:</b><br> {{ lname }} <br><br>
 
-					Primary Interest:<br> {{ priSkill }} <br><br>
+					<b>Primary Interest:</b><br> {{ priSkill }} <br><br>
 
-					Location:<br> {{ location }} <br><br>
+					<b>Location:</b><br> {{ location }} <br><br>
 
-					Job:<br> {{ job }} <br><br>
+					<b>Job:</b><br> {{ job }} <br><br>
 
-					Salary:<br> {{ salary }} <br><br>
+					<b>Salary:</b><br> {{ salary }} <br><br>
 
-					Email:<br> {{ email }} <br><br>
+					<b>Email:</b><br> {{ email }} <br><br>
 
-					Phone No:<br> {{ phone_no }} <br><br>
+					<b>Phone No:</b><br> {{ phone_no }} <br><br>
 
-					Registered As Employee Datetime: <br> {{ reg_datetime }} <br><br>
+					<b>Registered As Employee Datetime:</b> <br> {{ reg_datetime }} <br><br>
 
-					Benefit:<br> {{ benefit }} <br><br>
+					<b>Benefit:</b><br> {{ benefit }} <br><br>
 
 					<a href="mailto:{{ email }}">Contact</a>
 
@@ -432,6 +432,7 @@
 			<br>
 			<form>
 				<h3>Following Employee Attendances Results</h3>
+				<br>
 				{% for attendance in att_result %}
 				{{'{0[0]:60s} {0[1]:20s} {0[2]:20s}'.format(attendance)}}
 				<br>
