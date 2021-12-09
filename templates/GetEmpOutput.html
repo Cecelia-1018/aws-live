@@ -47,7 +47,7 @@
 			background: linear-gradient(135deg, #70e1f5, #ffd194);
 		}
 
-		.details{
+		.details {
 			font-size: 18px;
 			font-weight: 500;
 		}
@@ -252,20 +252,40 @@
 					</div>
 
 					<div class="input-box-transparent">
-						<input type="hidden" name="date" value="" >
+						<input type="hidden" name="date" value="">
 					</div>
 
 					<div class="input-box-transparent">
-						<input type="hidden" name="time" value="" >
+						<input type="hidden" name="time" value="">
 					</div>
-                    
+
 					<b><label for="">Tick For Records</label><br></b>
-					<input type="checkbox" name="attendance" value="Present" checked> Present<br>
-					<input type="checkbox" name="attendance" value="Absent"> Absent<br>
-					<input type="checkbox" name="attendance" value="MC"> MC<br>
+					<div id="checkboxgroup">
+						<input type="checkbox" name="attendance" value="Present" checked> Present<br>
+						<input type="checkbox" name="attendance" value="Absent"> Absent<br>
+						<input type="checkbox" name="attendance" value="MC"> MC<br>
+					</div>
+
+					<script>
+						var group_ = (el, callback) => {
+							el.forEach((checkbox) => {
+								callback(checkbox)
+							})
+						}
+
+						group_(document.getElementsByName('attendance'), (item) => {
+							item.onclick = (e) => {
+								group_(document.getElementsByName('attendance'), (item) => {
+									item.checked = false;
+								})
+								e.target.checked = true;
+
+							}
+						})
+					</script>
 
 					<div class="input-box-transparent">
-						<input type="hidden" name="emp_id" value="{{ id }}" >
+						<input type="hidden" name="emp_id" value="{{ id }}">
 					</div>
 					<div class="button1">
 						<input class="btn" type="submit" name="delete" value="Save Attendance">
@@ -284,16 +304,16 @@
 							<span class="details"></span>
 							{% for emp_image_file_name_in_s3 in image_url %}
 							<img id="pic" src={{ emp_image_file_name_in_s3 }} alt="employee-image" />
-							
+
 							<input type=file name="emp_image_file"
-								oninput="pic.src=window.URL.createObjectURL(this.files[0])" >
+								oninput="pic.src=window.URL.createObjectURL(this.files[0])">
 							{% endfor %}
 							<br>
 						</div>
 
 
 						<div class="input-box-transparent">
-							<input type="hidden" name="emp_id" value="{{ id }}" >
+							<input type="hidden" name="emp_id" value="{{ id }}">
 						</div>
 
 						<div class="input-box">
