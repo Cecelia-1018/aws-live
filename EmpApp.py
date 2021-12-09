@@ -106,7 +106,7 @@ def ViewAttendance():
     format_result = '{0[0]:20s} {0[1]:10s} {0[2]:10s} {0[3]:10s} {0[4]:20s}'.format(att_result)
     
 
-    return render_template('ViewAttendance.html', att_result=format_result)
+    return render_template('ViewAttendance.html',  format_result=format_result)
         
 
 @app.route('/attendance-emp', methods=['GET','POST'])
