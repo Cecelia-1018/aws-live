@@ -97,11 +97,14 @@ def DeleteEmp():
         return render_template('UnsuccessDelete.html')
 
 @app.route('/view-attendance', methods=['GET','POST'])
-def SearchAttendance():
-    att_emp_sql = "SELECT employee.first_name, employee.last_name, attendance.date, attendance.time, attendance.att_values FROM attendance INNER JOIN employee ON attendance.emp_id = employee.emp_id"
-    cursor = db_conn.cursor()
-    cursor.execute(att_emp_sql)
-    att_result= cursor.fetchall()  
+def ViewAttendance():
+    emp_id= request.form['emp_id']
+
+    att_emp_sql = "SELECT attendance.date, attendance.time, attendance.att_values FROM attendance INNER JOIN employee ON attendance.emp_id = employee.emp_id WHERE employee.emp_id = %s"
+    mycursor = db_conn.cursor()
+    mycursor.execute(att_emp_sql, (emp_id))
+    att_result= mycursor.fetchall()
+      
     return render_template('ViewAttendanceOutput.html',  att_result=att_result)
     
         

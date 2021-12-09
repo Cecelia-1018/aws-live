@@ -242,6 +242,7 @@
 				<button class="tablinks" onclick="openAction(event, 'Attendance')">Attendance</button>
 				<button class="tablinks" onclick="openAction(event, 'Edit')">Edit</button>
 				<button class="tablinks" onclick="openAction(event, 'Delete')">Delete</button>
+				<button class="tablinks" onclick="openAction(event, 'AttendanceRecord')">Attendance's Records</button>
 			</div>
 
 			<div id="Attendance" class="tabcontent">
@@ -368,6 +369,7 @@
 				</form>
 			</div>
 
+
 			<script>
 				function openAction(evt, actionName) {
 					var i, tabcontent, tablinks;
@@ -383,6 +385,17 @@
 					evt.currentTarget.className += " active";
 				}
 			</script>
+
+			<div id="AttendanceRecord" class="tabcontent">
+				<br>
+				<form action="/view-attendance" method="POST">
+				<h3>Following Employee Attendances Results</h3>
+				{% for attendance in att_result %}
+				{{'{0[0]:60s} {0[1]:20s} {0[2]:20s}'.format(attendance)}} 
+				<br>
+				{% endfor %}
+			</div>
+
 
 		</div>
 
