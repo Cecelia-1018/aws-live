@@ -105,6 +105,9 @@ def ViewAttendance():
             return render_template('ViewAttendance.html', att_result=att_result)
         except Exception as e:
             return render_template('IdNotFound.html')
+    else:
+        return render_template('AddEmp.html', fetchdata=fetchdata)
+
 
         
     
