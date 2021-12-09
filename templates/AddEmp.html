@@ -146,28 +146,6 @@
 			background: linear-gradient(-135deg, #74ebd5, #acb6e5);
 		}
 
-		.button2 {
-			height: 45px;
-			margin: 35px 0;
-		}
-
-		.button2 input {
-			height: 100%;
-			width: 100%;
-			border-radius: 5px;
-			border: none;
-			color: #fff;
-			font-size: 18px;
-			font-weight: 500;
-			letter-spacing: 1px;
-			cursor: pointer;
-			transition: all 0.3s ease;
-			background: linear-gradient(135deg, #C6FFDD, #FBD786,#f7797d);
-		}
-
-		.button2 input:hover {
-			background: linear-gradient(-135deg, #C6FFDD, #FBD786,#f7797d);
-		}
 		#pic {
 			/* float: left; */
 			width: 150px;
@@ -191,13 +169,6 @@
 				<div class="button" type="submit" formaction="/getemp" method="GET">
 					<input type="submit" value="Get Employee Information">
 				</div>
-			</form>
-
-			<form action="/addemp" autocomplete="on" method="GET" enctype="multipart/form-data">
-				<div class="button2">
-					<input class="btn" type="submit" formaction="/view-attendance" value="View Attendance" method="POST">
-				</div>
-			
 			</form>
 
 			<form action="/addemp" autocomplete="on" method="POST" enctype="multipart/form-data">
@@ -249,6 +220,7 @@
 			</form>
 
 			<a href="/about">About Us</a>
+			<a href="/view-attendance">View Employee Attendance</a>
 		</div>
 	</div>
 </body>
