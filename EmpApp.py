@@ -146,15 +146,23 @@ def AddEmp():
         # datetime object containing current date and time
         now = datetime.now()
         dt_string = now.strftime("%d%m%Y%H%M%S")
+        reg = now.strftime("%d/%m/%Y %H:%M:%S")
 
         emp_id = request.form['emp_id'] + dt_string
         first_name = request.form['first_name']
         last_name = request.form['last_name']
         pri_skill = request.form['pri_skill']
         location = request.form['location']
+        job = request.form['job']
+        salary = request.form['salary']
+        email = request.form['email']
+        phone_no = request.form['phone_no']
+        reg_datetime = request.form['reg_datetime'] + reg
+        benefit = request.form['benefit']
+
         emp_image_file = request.files['emp_image_file']
 
-        insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
+        insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s,%s, %s, %s, %s, %s, %s)"
         cursor = db_conn.cursor()
 
         if emp_image_file.filename == "":
@@ -162,7 +170,7 @@ def AddEmp():
 
         try:
 
-            cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
+            cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location,job,salary,email,phone_no,reg_datetime,benefit))
             db_conn.commit()
             emp_name = "" + first_name + " " + last_name
             # Uplaod image file in S3 #

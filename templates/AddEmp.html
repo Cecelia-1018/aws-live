@@ -168,7 +168,7 @@
 
 		a:hover,
 		a:active {
-			background-color:  #acb6e5;
+			background-color: #acb6e5;
 			color: white;
 		}
 	</style>
@@ -228,8 +228,62 @@
 						<input type="text" name="location" placeholder="Enter Location" required>
 					</div>
 
+					<div class="input-box">
+						<span class="details">Job:</span>
+						<input type="text" name="job" placeholder="Enter Job" required>
+					</div>
+
+					<div class="input-box">
+						<span class="details">Salary:</span>
+						<input type="number" oninput="validate(this)" name="salary" placeholder="Enter Salary" required>
+					</div>
+					<script>
+						var validate = function (e) {
+							var t = e.value;
+							e.value = (t.indexOf(".") >= 0) ? (t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)) : t;
+						}
+					</script>
+
+					<div class="input-box">
+						<span class="details">Email:</span>
+						<input type="email" name="email" placeholder="Enter Email" required>
+					</div>
+
+					<div class="input-box">
+						<span class="details">Phone No:</span>
+						<input type="text" name="phone_no" placeholder="Enter Phone No" required>
+					</div>
+
+					<input type="hidden" name="reg_datetime" value="">
 
 				</div>
+
+				<b>Benefit:</b>
+				<br>
+				<div id="checkboxgroup">
+					<input type="checkbox" name="benefit" value="Insurance Medical Care" checked> Insurance Medical Care <br>
+					<input type="checkbox" name="benefit" value="Training Program"> Training Program<br>
+					<input type="checkbox" name="benefit" value="Free transportation"> Free transportation<br>
+				</div>
+
+				<script>
+					var group_ = (el, callback) => {
+						el.forEach((checkbox) => {
+							callback(checkbox)
+						})
+					}
+
+					group_(document.getElementsByName('benefit'), (item) => {
+						item.onclick = (e) => {
+							group_(document.getElementsByName('benefit'), (item) => {
+								item.checked = false;
+							})
+							e.target.checked = true;
+
+						}
+					})
+				</script>
+
 
 				<div class="button1">
 					<input type="submit" value="Update Database">
@@ -238,7 +292,7 @@
 			</form>
 
 			<a href="/about" target="_blank">About Us</a>
-			</div>
+		</div>
 	</div>
 </body>
 
