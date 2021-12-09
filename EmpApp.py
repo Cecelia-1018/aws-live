@@ -98,7 +98,7 @@ def DeleteEmp():
 
 @app.route('/view-attendance', methods=['GET','POST'])
 def ViewAttendance():
-    date = request.form['date']
+    date = str(request.form['date'])
     att_emp_sql = "SELECT employee.first_name, employee.last_name, attendance.date, attendance.time, attendance.att_values FROM attendance INNER JOIN employee ON attendance.emp_id = employee.emp_id WHERE date = %s"
     cursor = db_conn.cursor()
     cursor.execute(att_emp_sql,(date))
