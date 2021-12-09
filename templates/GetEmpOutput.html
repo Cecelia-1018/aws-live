@@ -52,6 +52,13 @@
 			font-weight: 500;
 		}
 
+		.content form .employee-details {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			margin: 20px 0 12px 0;
+		}
+
 		form .button {
 			height: 45px;
 			margin: 35px 0;
@@ -230,6 +237,7 @@
 		<div class="tab">
 			<button class="tablinks" onclick="openAction(event, 'EmployeeInfo')" id="defaultOpen">Info</button>
 			<button class="tablinks" onclick="openAction(event, 'Edit')">Edit</button>
+			<button class="tablinks" onclick="openAction(event, 'EditBenefit')">Edit Benefit</button>
 			<button class="tablinks" onclick="openAction(event, 'Delete')">Delete</button>
 			<button class="tablinks" onclick="openAction(event, 'Attendance')">Attendance</button>
 			<button class="tablinks" onclick="openAction(event, 'AttendanceRecord')">Attendance's Records</button>
@@ -259,7 +267,7 @@
 
 					<b>Job:</b><br> {{ job }} <br><br>
 
-					<b>Salary:</b><br> RM {{ "{:.2f}".format(salary) }} <br><br> 
+					<b>Salary:</b><br> RM {{ "{:.2f}".format(salary) }} <br><br>
 
 					<b>Email:</b><br> {{ email }} <br><br>
 
@@ -328,66 +336,133 @@
 
 		<div id="Edit" class="tabcontent">
 			<br>
-			<form action="/editemp" autocomplete="on" method="POST" enctype="multipart/form-data">
+			<div class="content">
+				<form action="/editemp" autocomplete="on" method="POST" enctype="multipart/form-data">
 
 
-				<div class="employee-details">
+					<div class="employee-details">
 
-					<div class="input-box-image">
-						<span class="details"></span>
-						{% for emp_image_file_name_in_s3 in image_url %}
-						<img id="pic" src={{ emp_image_file_name_in_s3 }} alt="employee-image" />
+						<div class="input-box-image">
+							<span class="details"></span>
+							{% for emp_image_file_name_in_s3 in image_url %}
+							<img id="pic" src={{ emp_image_file_name_in_s3 }} alt="employee-image" />
 
-						<input type=file name="emp_image_file"
-							oninput="pic.src=window.URL.createObjectURL(this.files[0])">
-						{% endfor %}
-						<br>
-					</div>
+							<input type=file name="emp_image_file"
+								oninput="pic.src=window.URL.createObjectURL(this.files[0])">
+							{% endfor %}
+							<br>
+						</div>
 
 
-					<div class="input-box-transparent">
+
 						<input type="hidden" name="emp_id" value="{{ id }}">
+
+
+						<div class="input-box">
+							<span class="details">First Name:</span>
+							<input type="text" name="first_name" value="{{ fname }}" placeholder="Enter First Name"
+								required>
+						</div>
+
+						<div class="input-box">
+							<span class="details">Last Name:</span>
+							<input type="text" name="last_name" value="{{ lname }}" placeholder="Enter Last Name"
+								required>
+						</div>
+
+						<div class="input-box">
+							<span class="details">Primary Skills:</span>
+							<input type="text" name="pri_skill" value="{{ priSkill }}"
+								placeholder="Enter Primary Skills" required>
+						</div>
+
+						<div class="input-box">
+							<span class="details">Location:</span>
+							<input type="text" name="location" value="{{ location }}" placeholder="Enter Location"
+								required>
+						</div>
+
+						<div class="input-box">
+							<span class="details">Job:</span>
+							<input type="text" name="job" value="{{ job }}" required>
+						</div>
+
+						<div class="input-box">
+							<span class="details">Salary:</span>
+							<input type="number" oninput="validate(this)" placeholder="{{ salary }}" name="salary"
+								required>
+						</div>
+						<script>
+							var validate = function (e) {
+								var t = e.value;
+								e.value = (t.indexOf(".") >= 0) ? (t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)) : t;
+							}
+						</script>
+
+						<div class="input-box">
+							<span class="details">Email:</span>
+							<input type="email" name="email" value="{{ email }}" placeholder="Enter Email" required>
+						</div>
+
+						<div class="input-box">
+							<span class="details">Phone No:</span>
+							<input type="text" name="phone_no" value="{{ phone_no }}" placeholder="Enter Phone No"
+								required>
+						</div>
+
 					</div>
 
-					<div class="input-box">
-						<span class="details">First Name:</span>
-						<input type="text" name="first_name" value="{{ fname }}" placeholder="Enter First Name"
-							required>
+					<div class="button1">
+						<input type="submit" value="Update Database">
 					</div>
 
-					<div class="input-box">
-						<span class="details">Last Name:</span>
-						<input type="text" name="last_name" value="{{ lname }}" placeholder="Enter Last Name" required>
+					<div class="button">
+						<input type="reset" value="Reset">
 					</div>
-
-					<div class="input-box">
-						<span class="details">Primary Skills:</span>
-						<input type="text" name="pri_skill" value="{{ priSkill }}" placeholder="Enter Primary Skills"
-							required>
-					</div>
-
-					<div class="input-box">
-						<span class="details">Location:</span>
-						<input type="text" name="location" value="{{ location }}" placeholder="Enter Location" required>
-					</div>
+				</form>
 
 
 
+			</div>
 
+
+
+		</div>
+		<div id="EditBenefit" class="tabcontent">
+			<br>
+			<b>Benefit:{{ benefit }}</b>
+			<br>
+			<form>
+				<div id="checkboxgroup">
+					<input type="checkbox" name="benefit" value="Insurance Medical Care" checked> Insurance
+					Medical Care <br>
+					<input type="checkbox" name="benefit" value="Training Program"> Training Program<br>
+					<input type="checkbox" name="benefit" value="Free transportation"> Free transportation<br>
 				</div>
+		
+				<script>
+					var group_ = (el, callback) => {
+						el.forEach((checkbox) => {
+							callback(checkbox)
+						})
+					}
 
+					group_(document.getElementsByName('benefit'), (item) => {
+						item.onclick = (e) => {
+							group_(document.getElementsByName('benefit'), (item) => {
+								item.checked = false;
+							})
+							e.target.checked = true;
+
+						}
+					})
+				</script>
 				<div class="button1">
 					<input type="submit" value="Update Database">
 				</div>
-
-				<div class="button">
-					<input type="reset" value="Reset">
-				</div>
 			</form>
-
 		</div>
-
-
+		
 		<div id="Delete" class="tabcontent">
 			<br>
 			<form action="/delete-emp" method="POST">
@@ -400,8 +475,8 @@
 				</div>
 			</form>
 		</div>
-
-
+		
+		
 		<script>
 			function openAction(evt, actionName) {
 				var i, tabcontent, tablinks;
@@ -416,12 +491,12 @@
 				document.getElementById(actionName).style.display = "block";
 				evt.currentTarget.className += " active";
 
-				
+
 			}
 			// Get the element with id="defaultOpen" and click on it
 			document.getElementById("defaultOpen").click();
 		</script>
-
+		
 		<div id="AttendanceRecord" class="tabcontent">
 			<br>
 			<form>
@@ -433,20 +508,9 @@
 				{% endfor %}
 			</form>
 		</div>
-
-
-		<!-- </div>
-
-		<script>
-			function myFunction() {
-				var x = document.getElementById("more");
-				if (x.style.display === "none") {
-					x.style.display = "block";
-				} else {
-					x.style.display = "none";
-				}
-			}
-		</script> -->
+		
+		
+		
 		<form action="/getemp" autocomplete="on" method="GET">
 			<div class="button">
 				<input type="submit" value="Go Back">

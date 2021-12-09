@@ -215,11 +215,16 @@ def EditEmp():
         location = request.form['location']
         emp_id = request.form['emp_id']
         emp_image_file = request.files['emp_image_file']
+        job = request.form['job']
+        salary = request.form['salary']
+        email = request.form['email']
+        phone_no = request.form['phone_no']
+    
 
-        update_sql = "UPDATE employee SET first_name = %s, last_name = %s, pri_skill = %s, location = %s WHERE emp_id = %s"
+        update_sql = "UPDATE employee SET first_name = %s, last_name = %s, pri_skill = %s, location = %s,job = %s,salary = %s,email= %s, phone_no= %s WHERE emp_id = %s"
         cursor = db_conn.cursor()
 
-        changefield = (first_name, last_name, pri_skill, location, emp_id)
+        changefield = (first_name, last_name, pri_skill, location, job, salary, email, phone_no, emp_id)
 
         try:
             cursor.execute(update_sql, (changefield))
