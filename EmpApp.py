@@ -105,11 +105,6 @@ def ViewAttendance():
     return render_template('ViewAttendance.html', att_result=att_result)
         
 
-
-        
-    
-
-
 @app.route('/attendance-emp', methods=['GET','POST'])
 def AttendanceEmp():
     if request.method == 'POST':
@@ -145,9 +140,6 @@ def AttendanceEmp():
 
         finally:
             cursor.close()
-
-    
-
 
 
 @app.route("/addemp", methods=['GET','POST'])
