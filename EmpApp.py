@@ -271,6 +271,29 @@ def EditEmp():
     else:
         return render_template('GetEmp.html', AddEmp=AddEmp)
 
+@app.route("/editemp", methods=['GET','POST'])
+def EditEmp():
+    if request.method == 'POST':
+        emp_id = request.form['emp_id']
+        benefit = request.form['benefit']
+
+        update_sql = "UPDATE employee SET benefit= %s WHERE emp_id = %s"
+        cursor = db_conn.cursor()
+
+        changefield = (benefit,emp_id)
+
+        try:
+            cursor.execute(update_sql, (changefield))
+            db_conn.commit()
+
+        finally:
+            cursor.close()
+
+        print("all modification done...")
+        return render_template('SuccessEditBenefit.html')
+    else:
+        return render_template('GetEmp.html', AddEmp=AddEmp)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)

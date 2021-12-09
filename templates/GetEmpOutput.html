@@ -432,7 +432,8 @@
 			<br>
 			<b>Benefit:  {{ benefit }}</b>
 			<br>
-			<form>
+			<form action="/editbenefit-emp" method="POST">
+				<input type="hidden" name="emp_id" value="{{ id }}">
 				<div id="checkboxgroup">
 					<input type="checkbox" name="benefit" value="Insurance Medical Care" checked> Insurance
 					Medical Care <br>
