@@ -13,16 +13,16 @@
 		}
 
 		body {
-			height: auto;
+			height: 100%;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			padding: 10px;
-			background: linear-gradient(135deg, #70e1f5, #ffd194);
+			background: #ACEFFC;
 		}
 
 		.container {
-			max-width: 700px;
+			max-width: 1000px;
 			width: 100%;
 			background-color: #fff;
 			padding: 25px 30px;
@@ -181,6 +181,31 @@
 			border-top: none;
 		}
 
+		a:link,
+		a:visited {
+			background-color: white;
+			color: black;
+			border: 2px solid #acb6e5;
+			border-radius: 5px;
+			padding: 10px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+		}
+
+		a:hover,
+		a:active {
+			background-color: #acb6e5;
+			color: white;
+		}
+
+		@media screen and (max-width: 650px) {
+			.column {
+				width: 100%;
+				display: block;
+			}
+		}
+
 		#pic {
 			/* float: left; */
 			width: 150px;
@@ -201,204 +226,221 @@
 		</h1>
 		<br>
 
-		<form>
-			<div class="details">
-
-				{% for emp_image_file_name_in_s3 in image_url %}
-
-				<img id="pic" src={{ emp_image_file_name_in_s3 }}>
-
-				{% endfor %}
-				<br><br>
-
-				Employee ID:<br> {{ id }} <br><br>
-
-				First Name:<br> {{ fname }} <br><br>
-
-				Last Name:<br> {{ lname }} <br><br>
-
-				Primary Interest:<br> {{ priSkill }} <br><br>
-
-				Location:<br> {{ location }}
-
-				<!-- Image URL: <br> {{ image_url }} <br><br> -->
-
-				<br><br>
-			</div>
-		</form>
-
-		<form action="/getemp" autocomplete="on" method="GET">
-			<div class="button">
-				<input type="submit" value="Reset">
-			</div>
-		</form>
-
-		<div class="button2">
-			<input class="btn" type="submit" name="more" value="More Action" onclick="myFunction()">
+		<!-- <div id="more" style="display:none"> -->
+		<div class="tab">
+			<button class="tablinks" onclick="openAction(event, 'EmployeeInfo')" id="defaultOpen">Info</button>
+			<button class="tablinks" onclick="openAction(event, 'Edit')">Edit</button>
+			<button class="tablinks" onclick="openAction(event, 'Delete')">Delete</button>
+			<button class="tablinks" onclick="openAction(event, 'Attendance')">Attendance</button>
+			<button class="tablinks" onclick="openAction(event, 'AttendanceRecord')">Attendance's Records</button>
 		</div>
 
-		<div id="more" style="display:none">
-			<div class="tab">
-				<button class="tablinks" onclick="openAction(event, 'Attendance')">Attendance</button>
-				<button class="tablinks" onclick="openAction(event, 'Edit')">Edit</button>
-				<button class="tablinks" onclick="openAction(event, 'Delete')">Delete</button>
-				<button class="tablinks" onclick="openAction(event, 'AttendanceRecord')">Attendance's Records</button>
-			</div>
 
-			<div id="Attendance" class="tabcontent">
-				<br>
-				<form action="/attendance-emp" method="POST">
-					<div class="input-box-transparent">
-						<input type="hidden" name="attendance_id" value="A">
-					</div>
+		<div id="EmployeeInfo" class="tabcontent">
+			<form>
+				<div class="details">
 
-					<div class="input-box-transparent">
-						<input type="hidden" name="date" value="">
-					</div>
+					{% for emp_image_file_name_in_s3 in image_url %}
 
-					<div class="input-box-transparent">
-						<input type="hidden" name="time" value="">
-					</div>
+					<img id="pic" src={{ emp_image_file_name_in_s3 }}>
 
-					<b><label for="">Tick For Records</label><br></b>
-					<div id="checkboxgroup">
-						<input type="checkbox" name="attendance" value="Present" checked> Present<br>
-						<input type="checkbox" name="attendance" value="Absent"> Absent<br>
-						<input type="checkbox" name="attendance" value="MC"> MC<br>
-					</div>
+					{% endfor %}
+					<br><br>
 
-					<script>
-						var group_ = (el, callback) => {
-							el.forEach((checkbox) => {
-								callback(checkbox)
-							})
-						}
+					Employee ID:<br> {{ id }} <br><br>
 
-						group_(document.getElementsByName('attendance'), (item) => {
-							item.onclick = (e) => {
-								group_(document.getElementsByName('attendance'), (item) => {
-									item.checked = false;
-								})
-								e.target.checked = true;
+					First Name:<br> {{ fname }} <br><br>
 
-							}
+					Last Name:<br> {{ lname }} <br><br>
+
+					Primary Interest:<br> {{ priSkill }} <br><br>
+
+					Location:<br> {{ location }} <br><br>
+
+					Job:<br> {{ job }} <br><br>
+
+					Salary:<br> {{ salary }} <br><br>
+
+					Email:<br> {{ email }} <br><br>
+
+					Phone No:<br> {{ phone_no }} <br><br>
+
+					Registered As Employee Datetime: <br> {{ reg_datetime }} <br><br>
+
+					Benefit:<br> {{ benefit }} <br><br>
+
+					<a href="mailto:{{ email }}">Contact</a>
+
+					<br><br>
+				</div>
+
+			</form>
+		</div>
+
+
+
+		<!-- <div class="button2">
+			<input class="btn" type="submit" name="more" value="More Action" onclick="myFunction()">
+		</div> -->
+
+
+
+		<div id="Attendance" class="tabcontent">
+			<br>
+			<form action="/attendance-emp" method="POST">
+				<div class="input-box-transparent">
+					<input type="hidden" name="attendance_id" value="A">
+				</div>
+
+				<div class="input-box-transparent">
+					<input type="hidden" name="date" value="">
+				</div>
+
+				<div class="input-box-transparent">
+					<input type="hidden" name="time" value="">
+				</div>
+
+				<b><label for="">Tick For Records</label><br></b>
+				<div id="checkboxgroup">
+					<input type="checkbox" name="attendance" value="Present" checked> Present<br>
+					<input type="checkbox" name="attendance" value="Absent"> Absent<br>
+					<input type="checkbox" name="attendance" value="MC"> MC<br>
+				</div>
+
+				<script>
+					var group_ = (el, callback) => {
+						el.forEach((checkbox) => {
+							callback(checkbox)
 						})
-					</script>
+					}
+
+					group_(document.getElementsByName('attendance'), (item) => {
+						item.onclick = (e) => {
+							group_(document.getElementsByName('attendance'), (item) => {
+								item.checked = false;
+							})
+							e.target.checked = true;
+
+						}
+					})
+				</script>
+
+				<div class="input-box-transparent">
+					<input type="hidden" name="emp_id" value="{{ id }}">
+				</div>
+				<div class="button1">
+					<input class="btn" type="submit" name="delete" value="Save Attendance">
+				</div>
+			</form>
+		</div>
+
+		<div id="Edit" class="tabcontent">
+			<br>
+			<form action="/editemp" autocomplete="on" method="POST" enctype="multipart/form-data">
+
+
+				<div class="employee-details">
+
+					<div class="input-box-image">
+						<span class="details"></span>
+						{% for emp_image_file_name_in_s3 in image_url %}
+						<img id="pic" src={{ emp_image_file_name_in_s3 }} alt="employee-image" />
+
+						<input type=file name="emp_image_file"
+							oninput="pic.src=window.URL.createObjectURL(this.files[0])">
+						{% endfor %}
+						<br>
+					</div>
+
 
 					<div class="input-box-transparent">
 						<input type="hidden" name="emp_id" value="{{ id }}">
 					</div>
-					<div class="button1">
-						<input class="btn" type="submit" name="delete" value="Save Attendance">
-					</div>
-				</form>
-			</div>
 
-			<div id="Edit" class="tabcontent">
-				<br>
-				<form action="/editemp" autocomplete="on" method="POST" enctype="multipart/form-data">
-
-
-					<div class="employee-details">
-
-						<div class="input-box-image">
-							<span class="details"></span>
-							{% for emp_image_file_name_in_s3 in image_url %}
-							<img id="pic" src={{ emp_image_file_name_in_s3 }} alt="employee-image" />
-
-							<input type=file name="emp_image_file"
-								oninput="pic.src=window.URL.createObjectURL(this.files[0])">
-							{% endfor %}
-							<br>
-						</div>
-
-
-						<div class="input-box-transparent">
-							<input type="hidden" name="emp_id" value="{{ id }}">
-						</div>
-
-						<div class="input-box">
-							<span class="details">First Name:</span>
-							<input type="text" name="first_name" value="{{ fname }}" placeholder="Enter First Name"
-								required>
-						</div>
-
-						<div class="input-box">
-							<span class="details">Last Name:</span>
-							<input type="text" name="last_name" value="{{ lname }}" placeholder="Enter Last Name"
-								required>
-						</div>
-
-						<div class="input-box">
-							<span class="details">Primary Skills:</span>
-							<input type="text" name="pri_skill" value="{{ priSkill }}"
-								placeholder="Enter Primary Skills" required>
-						</div>
-
-						<div class="input-box">
-							<span class="details">Location:</span>
-							<input type="text" name="location" value="{{ location }}" placeholder="Enter Location"
-								required>
-						</div>
-
-
-					</div>
-
-					<div class="button1">
-						<input type="submit" value="Update Database">
-					</div>
-
-					<div class="button">
-						<input type="reset" value="Reset">
-					</div>
-				</form>
-
-			</div>
-
-
-			<div id="Delete" class="tabcontent">
-				<br>
-				<form action="/delete-emp" method="POST">
 					<div class="input-box">
-						<label for="suggest_delete">Enter Employee ID for delete:</label>
-						<input type="text" name="emp_id" value="{{id}}" required>
+						<span class="details">First Name:</span>
+						<input type="text" name="first_name" value="{{ fname }}" placeholder="Enter First Name"
+							required>
 					</div>
-					<div class="button1">
-						<input class="btn" type="submit" name="delete" value="Delete">
+
+					<div class="input-box">
+						<span class="details">Last Name:</span>
+						<input type="text" name="last_name" value="{{ lname }}" placeholder="Enter Last Name" required>
 					</div>
-				</form>
-			</div>
+
+					<div class="input-box">
+						<span class="details">Primary Skills:</span>
+						<input type="text" name="pri_skill" value="{{ priSkill }}" placeholder="Enter Primary Skills"
+							required>
+					</div>
+
+					<div class="input-box">
+						<span class="details">Location:</span>
+						<input type="text" name="location" value="{{ location }}" placeholder="Enter Location" required>
+					</div>
 
 
-			<script>
-				function openAction(evt, actionName) {
-					var i, tabcontent, tablinks;
-					tabcontent = document.getElementsByClassName("tabcontent");
-					for (i = 0; i < tabcontent.length; i++) {
-						tabcontent[i].style.display = "none";
-					}
-					tablinks = document.getElementsByClassName("tablinks");
-					for (i = 0; i < tablinks.length; i++) {
-						tablinks[i].className = tablinks[i].className.replace(" active", "");
-					}
-					document.getElementById(actionName).style.display = "block";
-					evt.currentTarget.className += " active";
-				}
-			</script>
+				</div>
 
-			<div id="AttendanceRecord" class="tabcontent">
-				<br>
-				<form>
-				<h3>Following Employee Attendances Results</h3>
-				{% for attendance in att_result %}
-				{{'{0[0]:60s} {0[1]:20s} {0[2]:20s}'.format(attendance)}} 
-				<br>
-				{% endfor %}
-				</form>
-			</div>
+				<div class="button1">
+					<input type="submit" value="Update Database">
+				</div>
 
+				<div class="button">
+					<input type="reset" value="Reset">
+				</div>
+			</form>
 
 		</div>
+
+
+		<div id="Delete" class="tabcontent">
+			<br>
+			<form action="/delete-emp" method="POST">
+				<div class="input-box">
+					<label for="suggest_delete">Enter Employee ID for delete:</label>
+					<input type="text" name="emp_id" value="{{id}}" required>
+				</div>
+				<div class="button1">
+					<input class="btn" type="submit" name="delete" value="Delete">
+				</div>
+			</form>
+		</div>
+
+
+		<script>
+			function openAction(evt, actionName) {
+				var i, tabcontent, tablinks;
+				tabcontent = document.getElementsByClassName("tabcontent");
+				for (i = 0; i < tabcontent.length; i++) {
+					tabcontent[i].style.display = "none";
+				}
+				tablinks = document.getElementsByClassName("tablinks");
+				for (i = 0; i < tablinks.length; i++) {
+					tablinks[i].className = tablinks[i].className.replace(" active", "");
+				}
+				document.getElementById(actionName).style.display = "block";
+				evt.currentTarget.className += " active";
+
+				
+			}
+			// Get the element with id="defaultOpen" and click on it
+			document.getElementById("defaultOpen").click();
+		</script>
+
+		<div id="AttendanceRecord" class="tabcontent">
+			<br>
+			<form>
+				<h3>Following Employee Attendances Results</h3>
+				{% for attendance in att_result %}
+				{{'{0[0]:60s} {0[1]:20s} {0[2]:20s}'.format(attendance)}}
+				<br>
+				{% endfor %}
+			</form>
+		</div>
+
+
+		<!-- </div>
 
 		<script>
 			function myFunction() {
@@ -409,12 +451,17 @@
 					x.style.display = "none";
 				}
 			}
-		</script>
-
+		</script> -->
+		<form action="/getemp" autocomplete="on" method="GET">
+			<div class="button">
+				<input type="submit" value="Go Back">
+			</div>
+		</form>
 
 	</div>
 
-	</form>
+
+
 
 </body>
 

@@ -63,7 +63,7 @@ def fetchdata():
             cursor.execute(fetch_emp_sql,(emp_id))
             emp= cursor.fetchall()  
             
-            (id,fname,lname,priSkill,location) = emp[0]
+            (id,fname,lname,priSkill,location,job,salary,email,phone_no,reg_datetime,benefit) = emp[0]
             image_url = show_image(custombucket)
 
             att_emp_sql = "SELECT attendance.date, attendance.time, attendance.att_values FROM attendance INNER JOIN employee ON attendance.emp_id = employee.emp_id WHERE employee.emp_id = %s"
@@ -71,7 +71,7 @@ def fetchdata():
             mycursor.execute(att_emp_sql, (emp_id))
             att_result= mycursor.fetchall()
 
-            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url,att_result=att_result)
+            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,job=job,salary=salary,email=email,phone_no=phone_no,reg_datetime=reg_datetime,benefit=benefit,image_url=image_url,att_result=att_result)
         except Exception as e:
             return render_template('IdNotFound.html')
     else:
