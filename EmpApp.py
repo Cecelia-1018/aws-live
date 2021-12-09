@@ -120,7 +120,7 @@ def ViewAttendance():
                 att_list.append(emp_id)
                         
            
-            return render_template('ViewAttendance.html')
+            return render_template('ViewAttendance.html',ID=attendanceID,)
         except Exception as e:
             return render_template('IdNotFound.html')
     else:
