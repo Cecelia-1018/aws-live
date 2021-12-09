@@ -389,7 +389,7 @@
 
 						<div class="input-box">
 							<span class="details">Salary:</span>
-							<input type="number" oninput="validate(this)" placeholder="{{ salary }}" name="salary"
+							<input type="number" oninput="validate(this)" placeholder="{{ ("{:.2f}".format(salary)) }}" name="salary"
 								required>
 						</div>
 						<script>
@@ -430,7 +430,7 @@
 		</div>
 		<div id="EditBenefit" class="tabcontent">
 			<br>
-			<b>Benefit:{{ benefit }}</b>
+			<b>Benefit:  {{ benefit }}</b>
 			<br>
 			<form>
 				<div id="checkboxgroup">
