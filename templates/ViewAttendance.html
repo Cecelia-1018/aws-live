@@ -79,9 +79,9 @@
 		</h1>
 		<br>
 		<h2>Following Employee Attendance record.</h2><br>
-
+       
 		{% for attendance in att_result %}
-		{{'{0[0]:40s} {0[1]:20s} {0[2]:20s} {0[3]:20s} {0[4]:40s}'.format(attendance)}}
+		{{'{0[0]:60s} {0[1]:20s} {0[2]:20s} {0[3]:20s} {0[4]:60s}'.format(attendance)}}
 		{% endfor %}
 
 		<title>Attendance Emp Output</title>
