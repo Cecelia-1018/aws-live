@@ -89,7 +89,7 @@
 			</tr>
 		
 		{% for attendance in att_result %}
-		{{' <tr><td>{0[0]:60s}</td></tr> <tr><td>{0[1]:20s}</td></tr> <tr><td>{0[2]:20s}</td></tr> <tr><td>{0[3]:20s}</td></tr> <tr><td>{0[4]:60s}</td></tr>'.format(attendance)}} 
+		{{' "<tr><td>"{0[0]:60s}"</td></tr>" <tr><td>{0[1]:20s}</td></tr> <tr><td>{0[2]:20s}</td></tr> <tr><td>{0[3]:20s}</td></tr> <tr><td>{0[4]:60s}</td></tr>'.format(attendance)}} 
 		<!-- <br> -->
 		{% endfor %}
 	</tr>
