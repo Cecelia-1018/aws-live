@@ -107,16 +107,25 @@ def AttendanceEmp():
         emp_id = request.form['emp_id']
 
         # cursor = db_conn.cursor(db_conn.cursors.DictCursor)
-
-        cursor = db_conn.cursor()
+        
         attendance = ','.join(attendance)
         att_values = (attendance)
 
-        cursor.execute('INSERT INTO attendance VALUES (%s,%s,%s,%s,%s)',attendance_id,date,time,att_values,emp_id)
-        db_conn.commit()
+        try:
 
-        return 'Your attentande record to mysql database!'
-    
+            insert_att_sql = 'INSERT INTO attendance VALUES (%s,%s,%s,%s,%s)'
+            cursor = db_conn.cursor()
+
+            cursor.execute(insert_att_sql, (attendance_id,date,time,att_values,emp_id))
+            db_conn.commit()
+
+            return 'Your attentance record to mysql database!'
+        except Exception as e:
+                return str(e)
+
+        finally:
+            cursor.close()
+
     return render_template('AddEmp.html')
 
 
