@@ -79,11 +79,21 @@
 		</h1>
 		<br>
 		<h2>Following Employee Attendance record.</h2><br>
-       
+        <table>
+			<tr>
+			  <th>First Name</th>
+			  <th>Last Name</th>
+			  <th>Date</th>
+			  <th>Time</th>
+			  <th>Attendance</th>
+			</tr>
+		
 		{% for attendance in att_result %}
-		<h3>{{'{0[0]:60s} {0[1]:20s} {0[2]:20s} {0[3]:20s} {0[4]:60s}'.format(attendance)}} </h3>
-		<br>
+		{{' <tr><td>{0[0]:60s}</td></tr> <tr><td>{0[1]:20s}</td></tr> <tr><td>{0[2]:20s}</td></tr> <tr><td>{0[3]:20s}</td></tr> <tr><td>{0[4]:60s}</td></tr>'.format(attendance)}} 
+		<!-- <br> -->
 		{% endfor %}
+	</tr>
+</table>
 
 		<title>Attendance Emp Output</title>
 		<form action="/" autocomplete="on" method="POST">
