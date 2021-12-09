@@ -70,6 +70,30 @@
 			background: linear-gradient(-135deg, #70e1f5, #ffd194);
 		}
 
+		form .button2 {
+			height: 45px;
+			margin: 35px 0;
+		}
+
+		form .button2 input {
+			height: 100%;
+			width: 100%;
+			border-radius: 5px;
+			border: none;
+			color: #fff;
+			font-size: 18px;
+			font-weight: 500;
+			letter-spacing: 1px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			background: linear-gradient(135deg, #74ebd5, #acb6e5);
+		}
+
+		form .button2 input:hover {
+			background: linear-gradient(-135deg, #74ebd5, #acb6e5);
+		}
+
+
 		form .input-box {
 			margin-bottom: 15px;
 			width: calc(100% / 2 - 20px);
@@ -103,7 +127,7 @@
 <body>
 	<div class="container">
 		<h1>
-			<div class="title">Attendance Records</div>
+			<div class="title">View Attendance Records</div>
 		</h1>
 		<br>
 
@@ -111,6 +135,9 @@
 			<div class="input-box">
 				<span class="details">Select Date:</span>
 				<input type="date" name="date" autofocus size="40">
+			</div>
+			<div class="button2">
+				<input type="submit" value="Search Records">
 			</div>
 		</form>
        
