@@ -271,7 +271,7 @@ def EditEmp():
     else:
         return render_template('GetEmp.html', AddEmp=AddEmp)
 
-@app.route("/editemp", methods=['GET','POST'])
+@app.route("/editbenefit-emp", methods=['GET','POST'])
 def EditEmp():
     if request.method == 'POST':
         emp_id = request.form['emp_id']
