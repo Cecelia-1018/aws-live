@@ -94,33 +94,6 @@
 		}
 
 
-		form .input-box {
-			margin-bottom: 15px;
-			width: calc(100% / 2 - 20px);
-		}
-
-		form .input-box span.details {
-			display: block;
-			font-weight: 500;
-			margin-bottom: 5px;
-		}
-
-		.input-box input {
-			height: 45px;
-			width: 100%;
-			outline: none;
-			font-size: 16px;
-			border-radius: 5px;
-			padding-left: 15px;
-			border: 1px solid #ccc;
-			border-bottom-width: 2px;
-			transition: all 0.3s ease;
-		}
-
-		.input-box input:focus,
-		.input-box input:valid {
-			border-color: #70e1f5;
-		}
 	</style>
 </head>
 
@@ -130,18 +103,14 @@
 			<div class="title">View Attendance Records</div>
 		</h1>
 		<br>
+        <h3>Following Employee Attendances Results</h3>
+       
+		{% for attendance in att_result %}
+		{{'{0[0]:60s} {0[1]:20s} {0[2]:20s} {0[3]:20s} {0[4]:60s}'.format(attendance)}} 
+		<br>
+		{% endfor %}
 
-		<form action="/view-attendance" autocomplete="on" method="POST">
-			<div class="input-box">
-				<span class="details">Select Date:</span>
-				<input type="date" name="date" autofocus size="40">
-			</div>
-			<div class="button2">
-				<input type="submit" value="Search Records">
-			</div>
-		</form>
-
-		<title>Attendance Emp </title>
+		<title>Attendance Emp Output</title>
 		<form action="/" autocomplete="on" method="POST">
 			<div class="button">
 				<input type="submit" value="Go Back">
