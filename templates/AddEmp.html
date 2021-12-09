@@ -153,6 +153,24 @@
 			border-radius: 50%;
 			margin-left: 50px;
 		}
+
+		a:link,
+		a:visited {
+			background-color: white;
+			color: black;
+			border: 2px solid #acb6e5;
+			border-radius: 5px;
+			padding: 10px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+		}
+
+		a:hover,
+		a:active {
+			background-color:  #acb6e5;
+			color: white;
+		}
 	</style>
 	<title>Add Employee Information</title>
 	<!-- <link rel="stylesheet" href="./styleAddEmp.css"> -->
@@ -164,7 +182,7 @@
 		<div class="title">Employee Database</div>
 
 		<div class="content">
-            
+
 			<form action="/addemp" autocomplete="on" method="GET" enctype="multipart/form-data">
 				<div class="button" type="submit" formaction="/getemp" method="GET">
 					<input type="submit" value="Get Employee Information">
@@ -172,7 +190,7 @@
 			</form>
 
 			<form action="/addemp" autocomplete="on" method="POST" enctype="multipart/form-data">
-				
+
 
 				<div class="employee-details">
 
@@ -186,9 +204,9 @@
 					</div>
 
 
-					
+
 					<input type="hidden" name="emp_id" placeholder="Enter ID" required>
-					
+
 
 					<div class="input-box">
 						<span class="details">First Name:</span>
@@ -219,8 +237,9 @@
 
 			</form>
 
-			<a href="/about">About Us</a>
-			<a href="/view-attendance">View Employee Attendance</a>
+
+			<a href="/view-attendance">View Employee Attendance</a> |
+			<a href="/about" target="_blank">About Us</a>
 		</div>
 	</div>
 </body>
