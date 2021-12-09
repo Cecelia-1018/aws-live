@@ -106,13 +106,12 @@ def AttendanceEmp():
         attendance = request.form.getlist('attendance')
         emp_id = request.form['emp_id']
 
-
-        cursor = db_conn.connection.cursor(db_conn.cursors.DictCursor)
+        cursor = db_conn.cursor(db_conn.cursors.DictCursor)
         attendance = ','.join(attendance)
         att_values = (attendance)
 
         cursor.execute('INSERT INTO attendance VALUES (%s,%s,%s,%s,%s)',attendance_id,date,time,att_values,emp_id)
-        db_conn.connection.commit()
+        db_conn.commit()
 
         return 'Your attentande record to mysql database!'
     
