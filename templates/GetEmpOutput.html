@@ -338,7 +338,7 @@
 			<br>
 			<div class="content">
 				<form action="/editemp" autocomplete="on" method="POST" enctype="multipart/form-data">
-
+                    <input type="hidden" name="emp_id" value="{{ id }}">
 
 					<div class="employee-details">
 
@@ -354,9 +354,9 @@
 						</div>
 
 
-
-						<input type="hidden" name="emp_id" value="{{ id }}">
-
+                       
+						
+					    
 
 						<div class="input-box">
 							<span class="details">First Name:</span>
