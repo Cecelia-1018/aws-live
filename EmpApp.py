@@ -100,7 +100,7 @@ def DeleteEmp():
 def SearchAttendance():
     date = request.form.get('date')
     
-    dr_date = datetime.strftime(date,"%d/%m/%Y")
+    dr_date = datetime.datetime.strftime(date,"%d/%m/%Y")
     string_date = str(dr_date)
 
     att_emp_sql = "SELECT employee.first_name, employee.last_name, attendance.date, attendance.time, attendance.att_values FROM attendance INNER JOIN employee ON attendance.emp_id = employee.emp_id WHERE date = %s"
