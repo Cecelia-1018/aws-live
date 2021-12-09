@@ -99,9 +99,6 @@ def ViewAttendance():
 
         att_result= cursor.fetchall()  
 
-        # for x in att_result:
-        #     print(x)
-        
         return render_template('ViewAttendance.html', att_result=att_result)
     except Exception as e:
         return render_template('IdNotFound.html')
@@ -139,7 +136,7 @@ def AttendanceEmp():
             cursor.execute(insert_att_sql, (attendance_id,date,time,att_values,emp_id))
             db_conn.commit()
 
-            return render_template('ViewAttendance.html')
+            return render_template('SuccessTakeAttendance.html', Id = attendance_id)
         except Exception as e:
                 return str(e)
 
