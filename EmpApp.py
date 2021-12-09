@@ -98,29 +98,11 @@ def ViewAttendance():
             cursor.execute(att_emp_sql)
 
             att_result= cursor.fetchall()  
-            att_list = []
-            att_table="attendance_iddatetimeatt_valuesemp_id"
 
-            att_list.append(att_table)
-
-            for row in att_result:
-                attendanceID = "%s"%row[0]
-                att_list.append(attendanceID)
-
-                att_date = "%s"%row[1]
-                att_list.append(att_date)
-
-                att_time = "%s"%row[2]
-                att_list.append(att_time)
-
-                att_type = "%s"%row[3]
-                att_list.append(att_type)
-
-                emp_id = "%s"%row[4]
-                att_list.append(emp_id)
-                        
+            # for x in att_result:
+            #     print(x)
            
-            return render_template('ViewAttendance.html',ID=attendanceID,)
+            return render_template('ViewAttendance.html', att_result=att_result)
         except Exception as e:
             return render_template('IdNotFound.html')
     else:

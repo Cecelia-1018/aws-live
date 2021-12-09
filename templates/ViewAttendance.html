@@ -73,10 +73,11 @@
 			</h1>
 			<br>
 			<h2>Following Employee Attendance record.</h2><br>
-			<table>
-				{{ID}}
-			</table>
 
+			{% for attendance in att_result %}
+				{{attendance}}
+			{% endfor %}
+			
 			<title>Attendance Emp Output</title>
 				<form action="/getemp" autocomplete="on" method = "POST">
 					<div class="button">
