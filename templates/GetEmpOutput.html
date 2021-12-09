@@ -227,8 +227,6 @@
 			</div>
 		</form>
 
-
-
 		<form action="/getemp" autocomplete="on" method="GET">
 			<div class="button">
 				<input type="submit" value="Reset">
@@ -241,8 +239,38 @@
 
 		<div id="more" style="display:none">
 			<div class="tab">
+				<button class="tablinks" onclick="openAction(event, 'Attendance')">Attendance</button>
 				<button class="tablinks" onclick="openAction(event, 'Edit')">Edit</button>
 				<button class="tablinks" onclick="openAction(event, 'Delete')">Delete</button>
+			</div>
+
+			<div id="Attendance" class="tabcontent">
+				<br>
+				<form action="/attendance-emp" method="POST">
+					<div class="input-box-transparent">
+						<input type="hidden" name="attendance_id" value="A">
+					</div>
+
+					<div class="input-box-transparent">
+						<input type="hidden" name="date" value="" >
+					</div>
+
+					<div class="input-box-transparent">
+						<input type="hidden" name="time" value="" >
+					</div>
+                    
+					<b><label for="">Tick For Records</label><br></b>
+					<input type="checkbox" name="attendance" value="Bike" checked> Present<br>
+					<input type="checkbox" name="attendance" value="Car"> Absent<br>
+					<input type="checkbox" name="attendance" value="Boat"> MC<br>
+
+					<div class="input-box-transparent">
+						<input type="hidden" name="emp_id" value="{{ id }}" >
+					</div>
+					<div class="button1">
+						<input class="btn" type="submit" name="delete" value="Save Attendance">
+					</div>
+				</form>
 			</div>
 
 			<div id="Edit" class="tabcontent">

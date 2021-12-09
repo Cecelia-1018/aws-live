@@ -90,7 +90,34 @@ def DeleteEmp():
         return render_template('UnsuccessDelete.html')
 
 
-    # return render_template('SuccessDelete.html')
+@app.route('/attendance-emp', methods=['GET','POST'])
+def AttendanceEmp():
+    if request.method == 'POST':
+
+        # datetime object containing current date and time
+        now = datetime.now()
+        dt_string = now.strftime("%d%m%Y%H%M%S")
+        d_string = now.strftime("%d/%m/%Y")
+        t_string = now.strftime("%H:%M:%S")
+
+        attendance_id = request.form['attendance_id'] + dt_string
+        date = request.form['date'] + d_string
+        time = request.form['time'] + t_string
+        attendance = request.form.getlist('attendance')
+        emp_id = request.form['emp_id']
+
+
+        cursor = db_conn.connection.cursor(db_conn.cursors.DictCursor)
+        attendance = ','.join(attendance)
+        att_values = (attendance)
+
+        cursor.execute('INSERT INTO attendance VALUES (%s,%s,%s,%s,%s)',attendance_id,date,time,att_values,emp_id)
+        db_conn.connection.commit()
+
+        return 'Your attentande record to mysql database!'
+    
+    return render_template('AddEmp.html')
+
 
 
 @app.route("/addemp", methods=['GET','POST'])
@@ -208,7 +235,7 @@ def EditEmp():
             cursor.close()
 
         print("all modification done...")
-        return render_template('AddEmpOutput.html', name=emp_name,id=emp_id)
+        return render_template('SuccessUpdate.html', name=emp_name,id=emp_id)
     else:
         return render_template('GetEmp.html', AddEmp=AddEmp)
 
