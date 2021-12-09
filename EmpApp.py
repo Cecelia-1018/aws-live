@@ -66,7 +66,12 @@ def fetchdata():
             (id,fname,lname,priSkill,location) = emp[0]
             image_url = show_image(custombucket)
 
-            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url)
+            att_emp_sql = "SELECT attendance.date, attendance.time, attendance.att_values FROM attendance INNER JOIN employee ON attendance.emp_id = employee.emp_id WHERE employee.emp_id = %s"
+            mycursor = db_conn.cursor()
+            mycursor.execute(att_emp_sql, (emp_id))
+            att_result= mycursor.fetchall()
+
+            return render_template('GetEmpOutput.html', id=id,fname=fname,lname=lname,priSkill=priSkill,location=location,image_url=image_url,att_result=att_result)
         except Exception as e:
             return render_template('IdNotFound.html')
     else:
@@ -95,18 +100,6 @@ def DeleteEmp():
         return render_template('SuccessDelete.html')
     except Exception as e:
         return render_template('UnsuccessDelete.html')
-
-@app.route('/view-attendance', methods=['GET','POST'])
-def ViewAttendance():
-    emp_id= request.form['emp_id']
-
-    att_emp_sql = "SELECT attendance.date, attendance.time, attendance.att_values FROM attendance INNER JOIN employee ON attendance.emp_id = employee.emp_id WHERE employee.emp_id = %s"
-    mycursor = db_conn.cursor()
-    mycursor.execute(att_emp_sql, (emp_id))
-    att_result= mycursor.fetchall()
-      
-    return render_template('ViewAttendanceOutput.html',  att_result=att_result)
-    
         
 
 @app.route('/attendance-emp', methods=['GET','POST'])
