@@ -106,7 +106,9 @@ def AttendanceEmp():
         attendance = request.form.getlist('attendance')
         emp_id = request.form['emp_id']
 
-        cursor = db_conn.cursor(db_conn.cursors.DictCursor)
+        # cursor = db_conn.cursor(db_conn.cursors.DictCursor)
+
+        cursor = db_conn.cursor()
         attendance = ','.join(attendance)
         att_values = (attendance)
 
