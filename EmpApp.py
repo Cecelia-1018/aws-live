@@ -51,14 +51,14 @@ def show_image(bucket):
     # print("[INFO] : The contents inside show_image = ", public_urls)
     return public_urls
 
-# @app.route('/fetchdata/<emp_id>')
+
 @app.route("/fetchdata", methods=['GET','POST'])
 def fetchdata():
     if request.method == 'POST':
         try:
             emp_id = request.form['emp_id']
             cursor = db_conn.cursor()
-            # fetch_emp_sql = "SELECT emp_id AS Id, first_name AS fname, last_name AS lname FROM employee WHERE emp_id = %s"
+
             fetch_emp_sql = "SELECT * FROM employee WHERE emp_id = %s"
             cursor.execute(fetch_emp_sql,(emp_id))
             emp= cursor.fetchall()  
@@ -88,6 +88,44 @@ def DeleteEmp():
         return render_template('SuccessDelete.html')
     except Exception as e:
         return render_template('UnsuccessDelete.html')
+
+@app.route('/view-attendance', methods=['GET','POST'])
+def ViewAttendance():
+    if request.method == 'POST':
+        try:
+            att_emp_sql = "SELECT * FROM attendance"
+            cursor = db_conn.cursor()
+            cursor.execute(att_emp_sql)
+
+            att_result= cursor.fetchall()  
+            att_list = []
+            att_table="attendance_iddatetimeatt_valuesemp_id"
+
+            att_list.append(att_table)
+
+            for row in att_result:
+                attendanceID = "%s"%row[0]
+                att_list.append(attendanceID)
+
+                att_date = "%s"%row[1]
+                att_list.append(att_date)
+
+                att_time = "%s"%row[2]
+                att_list.append(att_time)
+
+                att_type = "%s"%row[3]
+                att_list.append(att_type)
+
+                emp_id = "%s"%row[4]
+                att_list.append(emp_id)
+                        
+           
+            return render_template('ViewAttendance.html')
+        except Exception as e:
+            return render_template('IdNotFound.html')
+    else:
+        return render_template('AddEmp.html', fetchdata=fetchdata)
+    
 
 
 @app.route('/attendance-emp', methods=['GET','POST'])
