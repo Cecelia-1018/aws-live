@@ -259,7 +259,7 @@
 
 					<b>Job:</b><br> {{ job }} <br><br>
 
-					<b>Salary:</b><br> {{ salary }} <br><br>
+					<b>Salary:</b><br> RM {{ "{:.2f}".format(salary) }} <br><br> "{:.2f}".format(a_float)
 
 					<b>Email:</b><br> {{ email }} <br><br>
 
@@ -276,14 +276,6 @@
 
 			</form>
 		</div>
-
-
-
-		<!-- <div class="button2">
-			<input class="btn" type="submit" name="more" value="More Action" onclick="myFunction()">
-		</div> -->
-
-
 
 		<div id="Attendance" class="tabcontent">
 			<br>
@@ -378,6 +370,8 @@
 						<span class="details">Location:</span>
 						<input type="text" name="location" value="{{ location }}" placeholder="Enter Location" required>
 					</div>
+
+
 
 
 				</div>
