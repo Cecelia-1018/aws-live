@@ -98,16 +98,19 @@ def DeleteEmp():
 
 @app.route('/view-attendance', methods=['GET','POST'])
 def SearchAttendance():
-    date = request.form.get('date')
-    
-    dr_date = datetime.datetime.strftime(date,"%d/%m/%Y")
-    string_date = str(dr_date)
+    if request.method=="POST":
+        form_date = request.form.get('date')
+        
+        date = datetime.strftime(form_date,"%d/%m/%Y")
+   
 
-    att_emp_sql = "SELECT employee.first_name, employee.last_name, attendance.date, attendance.time, attendance.att_values FROM attendance INNER JOIN employee ON attendance.emp_id = employee.emp_id WHERE date = %s"
-    cursor = db_conn.cursor()
-    cursor.execute(att_emp_sql,(string_date))
-    att_result= cursor.fetchall()  
-    return render_template('ViewAttendanceOutput.html',  att_result=att_result)
+        att_emp_sql = "SELECT employee.first_name, employee.last_name, attendance.date, attendance.time, attendance.att_values FROM attendance INNER JOIN employee ON attendance.emp_id = employee.emp_id WHERE date = %s"
+        cursor = db_conn.cursor()
+        cursor.execute(att_emp_sql,(date))
+        att_result= cursor.fetchall()  
+        return render_template('ViewAttendanceOutput.html',  att_result=att_result)
+    else:
+        return render_template('AddEmp.html', fetchdata=fetchdata)
         
 
 @app.route('/attendance-emp', methods=['GET','POST'])
